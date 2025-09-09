@@ -1,0 +1,4 @@
+Dataset: EM-DAT Dataset
+License: Non-commercial academic use only, redistribution not allowed
+Source: https://public.emdat.be/data
+Notes: EM-DAT provides global disaster data for academic and policy use.

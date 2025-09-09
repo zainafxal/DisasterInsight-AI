@@ -1,0 +1,401 @@
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  padding-top: 6rem; /* Consistent top padding for all pages */
+  min-height: calc(100vh - 80px);
+}
+
+/* Header Section */
+.header {
+  margin-bottom: 2rem;
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.titleSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.pageIcon {
+  font-size: 3rem !important;
+  color: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.title {
+  font-size: 2.5rem !important;
+  font-weight: 800 !important;
+  color: var(--color-text);
+  margin-bottom: 0.25rem;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  color: var(--color-text-secondary);
+  font-size: 1.125rem;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.refreshChip {
+  font-weight: 500 !important;
+  transition: var(--transition-base);
+}
+
+.refreshChip:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.refreshBtn,
+.downloadBtn {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  transition: var(--transition-base);
+}
+
+.refreshBtn:hover,
+.downloadBtn:hover {
+  background: var(--color-surface-hover);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.updateBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+}
+
+/* Stats Grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.statCard {
+  position: relative;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md) !important;
+  overflow: hidden;
+  transition: var(--transition-base);
+}
+
+.statCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.statGradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+.statContent {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem !important;
+}
+
+.statIcon {
+  width: 56px;
+  height: 56px;
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-base);
+}
+
+.statIcon svg {
+  font-size: 1.75rem;
+}
+
+.statCard:hover .statIcon {
+  transform: scale(1.1);
+}
+
+.statValue {
+  font-size: 2rem !important;
+  font-weight: 800 !important;
+  color: var(--color-text);
+  line-height: 1 !important;
+  margin-bottom: 0.25rem;
+}
+
+.statLabel {
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+/* Map Card */
+.mapCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md) !important;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.mapHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.mapTitle {
+  font-weight: 700 !important;
+  color: var(--color-text);
+}
+
+.filterButtons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.filterBtn {
+  border-radius: var(--radius-full) !important;
+  text-transform: capitalize !important;
+  font-weight: 500 !important;
+  padding: 0.375rem 1rem !important;
+}
+
+.mapContainer {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-inner);
+}
+
+/* Table Card */
+.tableCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md) !important;
+  overflow: hidden;
+}
+
+.tableHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.tableTitle {
+  font-weight: 700 !important;
+  color: var(--color-text);
+}
+
+.alert {
+  border-radius: var(--radius-lg) !important;
+}
+
+.tableContainer {
+  background: transparent !important;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.tableRow {
+  transition: var(--transition-base);
+}
+
+.tableRow:hover {
+  background-color: var(--color-surface-hover);
+}
+
+.timeCell {
+  display: flex;
+  flex-direction: column;
+}
+
+.locationCell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.locationAvatar {
+  width: 32px;
+  height: 32px;
+  background: var(--color-bg-secondary);
+  color: var(--color-primary);
+}
+
+.locationText {
+  font-weight: 500;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.magnitudeChip {
+  font-weight: 600 !important;
+  min-width: 60px;
+}
+
+.depthCell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.depthIndicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.detailsBtn {
+  background: var(--color-bg-secondary);
+  transition: var(--transition-base);
+}
+
+.detailsBtn:hover {
+  background: var(--color-primary);
+  color: white;
+}
+
+/* Custom Toast */
+.customToast {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.toastIcon {
+  font-size: 2rem;
+  color: var(--color-warning);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+    padding-top: 5rem;
+  }
+  
+  .title {
+    font-size: 1.75rem !important;
+  }
+  
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .statContent {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem !important;
+  }
+  
+  .locationText {
+    max-width: 150px;
+  }
+}
+
+
+/* Dark mode fixes for LiveFeed */
+[data-theme="dark"] .statCard {
+  background: var(--color-surface) !important;
+}
+
+[data-theme="dark"] .mapCard,
+[data-theme="dark"] .tableCard {
+  background: var(--color-surface) !important;
+}
+
+[data-theme="dark"] .tableContainer {
+  background: var(--color-surface) !important;
+}
+
+[data-theme="dark"] .tableRow:hover {
+  background-color: var(--color-surface-hover) !important;
+}
+
+[data-theme="dark"] .customToast {
+  background: var(--color-surface) !important;
+  border-color: var(--color-border) !important;
+}
+
+
+/*
+  This is the final, definitive fix. It targets the specific
+  Material-UI classes within the dark theme selector to
+  guarantee the colors are not overridden.
+*/
+
+[data-theme="dark"] .magnitudeChip.MuiChip-root {
+  background-color: transparent !important; /* This is the problem */
+}
+
+[data-theme="dark"] .magnitudeChip.MuiChip-root.MuiChip-colorSuccess {
+  background-color: #10b981 !important;
+}
+
+[data-theme="dark"] .magnitudeChip.MuiChip-root.MuiChip-colorWarning {
+  background-color: #d97706 !important;
+}
+
+[data-theme="dark"] .magnitudeChip.MuiChip-root.MuiChip-colorError {
+  background-color: #dc2626 !important;
+}
+
+[data-theme="dark"] .magnitudeChip .MuiChip-label,
+[data-theme="dark"] .magnitudeChip .MuiChip-icon {
+  color: #ffffff !important;
+}

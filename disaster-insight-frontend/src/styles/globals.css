@@ -1,0 +1,513 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* Modern Color Palette */
+  --color-primary: #f97316;
+  --color-primary-dark: #ea580c;
+  --color-primary-light: #fb923c;
+  --color-secondary: #3b82f6;
+  --color-accent: #8b5cf6;
+  
+  /* Neutral Colors */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  
+  /* Light Mode */
+  --color-bg: #ffffff;
+  --color-bg-secondary: #f9fafb;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f9fafb;
+  --color-text: #111827;
+  --color-text-secondary: #6b7280;
+  --color-text-tertiary: #9ca3af;
+  --color-border: #e5e7eb;
+  --color-border-hover: #d1d5db;
+  
+  /* Semantic Colors */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-info: #3b82f6;
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #f97316 0%, #fbbf24 100%);
+  --gradient-secondary: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  --gradient-success: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+  --gradient-danger: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+  --gradient-dark: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  
+  /* Shadows */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+  
+  /* Blur */
+  --blur-sm: 8px;
+  --blur-md: 16px;
+  --blur-lg: 24px;
+  --blur-xl: 40px;
+  
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+  --radius-full: 9999px;
+
+
+  /* Border Radius - Increased for more rounded look
+  --radius-sm: 0.5rem;    
+  --radius-md: 0.75rem;    
+  --radius-lg: 1rem;       
+  --radius-xl: 1.5rem;     
+  --radius-2xl: 2rem;      
+  --radius-3xl: 2.5rem;    
+  --radius-full: 9999px; */
+  
+
+
+
+  /* Transitions */
+  --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slower: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Z-index */
+  --z-base: 0;
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-fixed: 30;
+  --z-modal-backdrop: 40;
+  --z-modal: 50;
+  --z-popover: 60;
+  --z-tooltip: 70;
+}
+
+[data-theme="dark"] {
+  /* Dark Mode Colors */
+  --color-bg: #0a0a0a;
+  --color-bg-secondary: #111111;
+  --color-surface: #1a1a1a;
+  --color-surface-hover: #262626;
+  --color-text: #fafafa;
+  --color-text-secondary: #a1a1aa;
+  --color-text-tertiary: #71717a;
+  --color-border: #27272a;
+  --color-border-hover: #3f3f46;
+  
+  /* Adjusted shadows for dark mode */
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.5), 0 1px 2px -1px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.75);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: var(--transition-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+
+/* Background pattern */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(at 40% 20%, hsla(28, 100%, 74%, 0.1) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, hsla(189, 100%, 56%, 0.1) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, hsla(355, 100%, 93%, 0.1) 0px, transparent 50%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+}
+
+h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+h2 { font-size: clamp(2rem, 4vw, 3rem); }
+h3 { font-size: clamp(1.5rem, 3vw, 2.25rem); }
+h4 { font-size: clamp(1.25rem, 2.5vw, 1.875rem); }
+h5 { font-size: clamp(1.125rem, 2vw, 1.5rem); }
+h6 { font-size: clamp(1rem, 1.5vw, 1.25rem); }
+
+/* Modern Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gray-400);
+  border-radius: 100px;
+  border: 3px solid var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gray-500);
+}
+
+/* Selection */
+::selection {
+  background: var(--color-primary);
+  color: white;
+}
+
+/* Focus Styles */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-md);
+}
+
+/* Glass Morphism */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(var(--blur-md));
+  -webkit-backdrop-filter: blur(var(--blur-md));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(var(--blur-md));
+  -webkit-backdrop-filter: blur(var(--blur-md));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Utility Classes */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 3s ease infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Modern Card Base */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-base);
+  overflow: hidden;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-border-hover);
+  transform: translateY(-2px);
+}
+
+/* Button Base */
+.btn {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  border-radius: var(--radius-lg);
+  transition: var(--transition-fast);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-primary {
+  background: var(--gradient-primary);
+  color: white;
+  box-shadow: 0 4px 14px 0 rgba(249, 115, 22, 0.25);
+  padding: 0.75rem 1.5rem;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 6px 20px 0 rgba(249, 115, 22, 0.35);
+  transform: translateY(-1px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  :root {
+    font-size: 14px;
+  }
+  
+  body::before {
+    opacity: 0.5;
+  }
+}
+
+
+/* Material-UI Component Dark Mode Overrides */
+[data-theme="dark"] .MuiCard-root {
+  background-color: var(--color-surface) !important;
+  color: var(--color-text) !important;
+}
+
+[data-theme="dark"] .MuiPaper-root {
+  background-color: var(--color-surface) !important;
+  color: var(--color-text) !important;
+}
+
+[data-theme="dark"] .MuiCardContent-root {
+  background-color: transparent !important;
+}
+
+[data-theme="dark"] .MuiChip-root {
+  background-color: var(--color-surface) !important;
+  border-color: var(--color-border) !important;
+  color: var(--color-text) !important;
+}
+
+[data-theme="dark"] .MuiChip-root.MuiChip-filled {
+  background-color: var(--color-surface) !important;
+}
+
+[data-theme="dark"] .MuiTextField-root .MuiOutlinedInput-root {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .MuiTextField-root .MuiOutlinedInput-root fieldset {
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .MuiTextField-root .MuiOutlinedInput-root:hover fieldset {
+  border-color: var(--color-border-hover);
+}
+
+[data-theme="dark"] .MuiButton-outlined {
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .MuiButton-outlined:hover {
+  border-color: var(--color-primary);
+  background-color: rgba(249, 115, 22, 0.08);
+}
+
+[data-theme="dark"] .MuiAlert-root {
+  background-color: var(--color-surface) !important;
+  color: var(--color-text) !important;
+}
+
+[data-theme="dark"] .MuiTableContainer-root {
+  background-color: var(--color-surface) !important;
+}
+
+[data-theme="dark"] .MuiTableCell-root {
+  color: var(--color-text) !important;
+  border-color: var(--color-border) !important;
+}
+
+[data-theme="dark"] .MuiDrawer-paper {
+  background-color: var(--color-surface) !important;
+  color: var(--color-text) !important;
+}
+
+/* Specific component fixes */
+[data-theme="dark"] .MuiLinearProgress-root {
+  background-color: var(--color-border) !important;
+}
+
+[data-theme="dark"] .MuiCircularProgress-root {
+  color: var(--color-primary) !important;
+}
+
+/* Fix for stat card icons */
+[data-theme="dark"] .iconWrapper {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Fix for tooltips */
+.MuiTooltip-tooltip {
+  background-color: var(--color-surface) !important;
+  color: var(--color-text) !important;
+  border: 1px solid var(--color-border) !important;
+  backdrop-filter: blur(10px);
+}
+
+.MuiTooltip-arrow {
+  color: var(--color-surface) !important;
+}
+
+
+
+/* Add page container utility class */
+.page-container {
+  padding-top: 80px; /* Height of header */
+  min-height: 100vh;
+}
+
+/* Ensure smooth scrolling doesn't hide content behind header */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Same as header height */
+}
+
+/* Fix for all page containers */
+main {
+  min-height: calc(100vh - 80px); /* Account for header */
+}
+
+
+
+.leaflet-map-pane,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-overlay-pane,
+.leaflet-heat-layer {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+
+
+
+/* ——— Semantic tints: keep identical in light + dark ——— */
+:root,
+[data-theme="dark"] {
+  --alert-warning-bg: rgba(245, 158, 11, 0.05);
+  --alert-warning-border: rgba(245, 158, 11, 0.30);
+  --alert-info-bg: rgba(59, 130, 246, 0.06);
+  --alert-info-border: rgba(59, 130, 246, 0.30);
+  --alert-success-bg: rgba(16, 185, 129, 0.06);
+  --alert-success-border: rgba(16, 185, 129, 0.30);
+  --alert-danger-bg: rgba(239, 68, 68, 0.06);
+  --alert-danger-border: rgba(239, 68, 68, 0.30);
+}
+
+/* Let standard alerts keep their severity tint in dark mode */
+[data-theme="dark"] .MuiAlert-root {
+background-color: initial !important;
+}
+
+.MuiAlert-root.MuiAlert-standardWarning {
+background-color: var(--alert-warning-bg) !important;
+border: 1px solid var(--alert-warning-border) !important;
+}
+.MuiAlert-root.MuiAlert-standardInfo {
+background-color: var(--alert-info-bg) !important;
+border: 1px solid var(--alert-info-border) !important;
+}
+.MuiAlert-root.MuiAlert-standardSuccess {
+background-color: var(--alert-success-bg) !important;
+border: 1px solid var(--alert-success-border) !important;
+}
+.MuiAlert-root.MuiAlert-standardError {
+background-color: var(--alert-danger-bg) !important;
+border: 1px solid var(--alert-danger-border) !important;
+}
+
+/* Outlined chips: keep borders/text readable in dark */
+[data-theme="dark"] .MuiChip-root.MuiChip-outlined {
+background-color: transparent !important;
+border-color: var(--color-border) !important;
+color: var(--color-text) !important;
+}
+
+/* Do NOT force a background on filled chips in dark mode.
+This preserves all your custom badge backgrounds (gradients, tints, etc.). /*/
+[data-theme="dark"] .MuiChip-root.MuiChip-filled {
+background-color: unset !important; /* leaves your existing backgrounds intact */
+border-color: inherit !important;
+color: inherit !important;
+}

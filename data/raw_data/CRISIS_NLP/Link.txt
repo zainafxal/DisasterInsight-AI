@@ -1,0 +1,4 @@
+Dataset: CrisisNLP Datasets (includes CrisisBenchmarks, Crowdflower_v2 & HumAID_data_events)
+License: Non-commercial use only, citation required
+Source: https://crisisnlp.qcri.org/
+Notes: These datasets include various labeled tweet datasets from crisis events.

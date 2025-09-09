@@ -1,0 +1,4 @@
+Dataset: USGS Earthquake Database
+License: Kaggle dataset terms (likely non-commercial use)
+Source: https://www.kaggle.com/datasets/usgs/earthquake-database
+Notes: Historical earthquake data compiled by the USGS.

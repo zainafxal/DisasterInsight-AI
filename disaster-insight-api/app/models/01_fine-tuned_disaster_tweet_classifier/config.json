@@ -1,0 +1,48 @@
+{
+  "activation": "gelu",
+  "architectures": [
+    "DistilBertForSequenceClassification"
+  ],
+  "attention_dropout": 0.1,
+  "dim": 768,
+  "dropout": 0.1,
+  "hidden_dim": 3072,
+  "id2label": {
+    "0": "affected_individuals",
+    "1": "caution_and_advice",
+    "2": "displaced_and_evacuations",
+    "3": "donation_and_volunteering",
+    "4": "infrastructure_and_utilities_damage",
+    "5": "injured_or_dead_people",
+    "6": "missing_and_found_people",
+    "7": "not_humanitarian",
+    "8": "requests_or_needs",
+    "9": "sympathy_and_support"
+  },
+  "initializer_range": 0.02,
+  "label2id": {
+    "affected_individuals": 0,
+    "caution_and_advice": 1,
+    "displaced_and_evacuations": 2,
+    "donation_and_volunteering": 3,
+    "infrastructure_and_utilities_damage": 4,
+    "injured_or_dead_people": 5,
+    "missing_and_found_people": 6,
+    "not_humanitarian": 7,
+    "requests_or_needs": 8,
+    "sympathy_and_support": 9
+  },
+  "max_position_embeddings": 512,
+  "model_type": "distilbert",
+  "n_heads": 12,
+  "n_layers": 6,
+  "pad_token_id": 0,
+  "problem_type": "single_label_classification",
+  "qa_dropout": 0.1,
+  "seq_classif_dropout": 0.2,
+  "sinusoidal_pos_embds": false,
+  "tie_weights_": true,
+  "torch_dtype": "float32",
+  "transformers_version": "4.55.2",
+  "vocab_size": 30522
+}

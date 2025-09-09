@@ -1,0 +1,592 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1100; /* Increased z-index */
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--color-border);
+  transition: var(--transition-base);
+  height: 80px; /* Explicit height */
+}
+
+[data-theme="dark"] .header {
+  background: rgba(15, 23, 42, 0.8);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.logoWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-decoration: none;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.logoFull {
+  margin-top: 0%;
+  height: 66px !important;
+  width: auto;
+  object-fit: contain;
+}
+
+.logoIcon {
+  height: 40px;
+  width: 40px;
+  object-fit: contain;
+}
+
+.tagline {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin-left: 2px;
+}
+
+.nav {
+  display: flex;
+  gap: 0.5rem;
+  flex: 1;
+  justify-content: center;
+}
+
+.navLink {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.625rem 1rem;
+  text-decoration: none;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  border-radius: var(--radius-lg);
+  transition: var(--transition-fast);
+  white-space: nowrap;
+  /* Add isolation to prevent layout issues */
+  isolation: isolate;
+}
+
+.navLink:hover {
+  color: var(--color-text);
+  background: var(--color-surface-hover);
+}
+
+.navLink.active {
+  color: var(--color-orange);
+  background: rgba(249, 115, 22, 0.1);
+}
+
+.navIcon {
+  font-size: 1.25rem;
+}
+
+.navLabel {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.activeIndicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--color-orange);
+  border-radius: 3px 3px 0 0;
+  box-shadow: 0 -2px 8px rgba(249, 115, 22, 0.4);
+  /* Center the indicator */
+  width: 40px;
+  margin: 0 auto;
+  /* Ensure it stays centered during animation */
+  transform: translateZ(0);
+}
+
+/* Alternative approach if the above doesn't work */
+.navLink.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 3px;
+  background: var(--color-orange);
+  border-radius: 3px 3px 0 0;
+  box-shadow: 0 -2px 8px rgba(249, 115, 22, 0.4);
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 rgba(233, 104, 11, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 12px rgba(233, 104, 11, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(233, 104, 11, 0.5);
+  }
+}
+
+.navLink.active::after {
+  animation: pulse 1.5s infinite;
+}
+
+
+/* Hide the motion div if using ::after approach */
+.navLink.active .activeIndicator {
+  display: none; /* Remove this line if using the motion div approach */
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Fix theme toggle button alignment */
+.themeToggle {
+  color: var(--color-text-secondary);
+  transition: var(--transition-fast);
+  border-radius: var(--radius-lg);
+  padding: 0.625rem;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.themeToggle svg {
+  display: block;
+  margin: 0;
+}
+
+/* Ensure the rotating animation maintains center alignment */
+.themeToggle > div {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 24px;
+  height: 24px;
+}
+
+.themeToggle,.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-sticky);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--color-border);
+  transition: var(--transition-base);
+}
+
+[data-theme="dark"] .header {
+  background: rgba(10, 10, 10, 0.7);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: var(--shadow-md);
+}
+
+[data-theme="dark"] .header.scrolled {
+  background: rgba(10, 10, 10, 0.95);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+/* Logo */
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logoFull {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+.logoIcon {
+  height: 44px;
+  width: 44px;
+  object-fit: contain;
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.logoStatus {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-success);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statusDot {
+  font-size: 0.625rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.tagline {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.25px;
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+  gap: 0.5rem;
+  flex: 1;
+  justify-content: center;
+  padding: 0 2rem;
+}
+
+.navLink {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.625rem 1rem;
+  text-decoration: none;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  border-radius: var(--radius-lg);
+  transition: var(--transition-fast);
+  white-space: nowrap;
+}
+
+.navLink:hover {
+  color: var(--color-text);
+  background: var(--color-surface-hover);
+}
+
+.navLink.active {
+  color: var(--color-primary);
+  background: rgba(249, 115, 22, 0.08);
+}
+
+[data-theme="dark"] .navLink.active {
+  background: rgba(249, 115, 22, 0.15);
+}
+
+.navIcon {
+  font-size: 1.375rem;
+  transition: var(--transition-fast);
+}
+
+.navLink:hover .navIcon {
+  transform: scale(1.1);
+}
+
+.navLabel {
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.activeIndicator {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 3px;
+  background: var(--color-primary);
+  border-radius: 3px 3px 0 0;
+  box-shadow: 0 -2px 8px rgba(249, 115, 22, 0.4);
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.actionBtn,
+.themeToggle,
+.menuBtn {
+  color: var(--color-text-secondary);
+  transition: var(--transition-fast);
+  border-radius: var(--radius-lg);
+  padding: 0.625rem;
+}
+
+.actionBtn:hover,
+.themeToggle:hover,
+.menuBtn:hover {
+  color: var(--color-text);
+  background: var(--color-surface-hover);
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background: var(--color-border);
+  margin: 0 0.25rem;
+}
+
+/* Drawer Styles */
+.drawerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg-secondary);
+}
+
+.drawerLogo {
+  height: 40px;
+  width: 40px;
+}
+
+.closeBtn {
+  color: var(--color-text-secondary);
+}
+
+.drawerList {
+  padding: 1rem 0;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.drawerItem {
+  margin: 0 0.75rem 0.25rem;
+  border-radius: var(--radius-lg);
+  transition: var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.drawerItem:hover {
+  background: var(--color-surface-hover);
+}
+
+.drawerItem.Mui-selected {
+  background: rgba(249, 115, 22, 0.08);
+}
+
+[data-theme="dark"] .drawerItem.Mui-selected {
+  background: rgba(249, 115, 22, 0.15);
+}
+
+.drawerItemContent {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.drawerIcon {
+  color: var(--color-text-secondary);
+  font-size: 1.5rem;
+  transition: var(--transition-fast);
+}
+
+.drawerItem.Mui-selected .drawerIcon {
+  color: var(--color-primary);
+}
+
+.drawerTextWrapper {
+  flex: 1;
+}
+
+.drawerActiveIndicator {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 24px;
+  background: var(--color-primary);
+  border-radius: 0 4px 4px 0;
+  box-shadow: 2px 0 8px rgba(249, 115, 22, 0.4);
+}
+
+.drawerFooter {
+  padding: 1.5rem;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-bg-secondary);
+}
+
+.drawerActions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.drawerActionBtn {
+  color: var(--color-text-secondary);
+  padding: 0.75rem;
+}
+
+/* Responsive */
+@media (max-width: 1280px) {
+  .nav {
+    padding: 0 1rem;
+  }
+  
+  .navLink {
+    padding: 0.625rem 0.875rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    height: 72px;
+    padding: 0 1.5rem;
+  }
+  
+  .nav {
+    gap: 0.25rem;
+    padding: 0;
+  }
+  
+  .navLink {
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .navLabel {
+    display: none;
+  }
+  
+  .navIcon {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    height: 64px;
+    padding: 0 1rem;
+  }
+  
+  .logoText {
+    display: none;
+  }
+}
+.menuBtn {
+  color: var(--color-text-secondary);
+  transition: var(--transition-fast);
+}
+
+.themeToggle:hover,
+.menuBtn:hover {
+  color: var(--color-text);
+  background: var(--color-surface-hover);
+}
+
+
+/* Drawer Styles */
+.drawerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.drawerLogo {
+  height: 32px;
+  width: 32px;
+}
+
+.drawerList {
+  padding: 1rem 0;
+}
+
+.drawerItem {
+  margin: 0 0.5rem;
+  border-radius: 8px;
+  transition: var(--transition-fast);
+}
+
+.drawerItem:hover {
+  background: var(--color-surface-hover);
+}
+
+.drawerItem.Mui-selected {
+  background: rgba(249, 115, 22, 0.1);
+  color: var(--color-orange);
+}
+
+.drawerIcon {
+  color: currentColor;
+  margin-right: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .nav {
+    gap: 0.25rem;
+  }
+  
+  .navLink {
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .navLabel {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    height: 64px;
+  }
+  
+  .tagline {
+    display: none;
+  }
+}

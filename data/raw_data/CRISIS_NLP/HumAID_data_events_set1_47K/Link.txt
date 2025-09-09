@@ -1,0 +1,4 @@
+Dataset: HumAID Dataset
+License: Non-commercial use only, citation required
+Source: https://crisisnlp.qcri.org/humaid_dataset
+Notes: This dataset contains labeled tweets from various disaster events.

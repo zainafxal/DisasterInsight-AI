@@ -1,0 +1,30 @@
+# -------------------------------------
+# ✅ FastAPI and Server
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+
+# -------------------------------------
+# ✅ Core Data Science Libraries
+pandas==2.1.3
+numpy==1.24.3
+scikit-learn==1.3.2
+xgboost==2.0.3
+prophet==1.1.5
+joblib==1.3.2
+openpyxl==3.1.2  # For reading Excel files
+plotly==5.18.0
+matplotlib==3.7.3
+
+# -------------------------------------
+# ✅ Transformers & NLP
+transformers[torch]==4.35.2
+accelerate==0.25.0
+
+# 🧠 NOTE: PyTorch is installed manually via Conda (CPU-only), not listed here.You can Run below command manually in your conda env if you have not created your en using environment.yml file
+# conda install pytorch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 cpuonly -c pytorch
+
+# -------------------------------------
+# ✅ FastAPI Internals & Utilities
+python-multipart==0.0.6
+pydantic==2.4.2
+python-dotenv==1.0.1

@@ -39,3 +39,10 @@ def read_root():
     # 3. Example of how to use the logger
     logger.info("Root endpoint was accessed by a client.") 
     return {"message": "Welcome to the Disaster Insight AI API. Go to /docs for the API documentation."}
+
+
+
+# --- Define Health Check Endpoint ---
+@app.get("/health", tags=["Health"])
+def health_check():
+    return {"status": "healthy"}

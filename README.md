@@ -41,6 +41,7 @@
 ---
 
 ## 📌 Overview
+[**Try Live Web App**](https://huggingface.co/spaces/zainafxal/disaster-insight-webapp)
 
 During a natural disaster, information is chaotic. Emergency responders, NGOs, and governments are flooded with unstructured data from social media while trying to anticipate where the next high-impact event might occur. **DisasterInsight AI** was built to solve this problem by providing a unified platform that filters the noise from real-time data streams, quantifies risk based on historical patterns, and provides strategic forecasts to enable proactive planning.
 
@@ -79,49 +80,68 @@ DisasterInsight AI is built as a modern, decoupled, three-tier system, ensuring 
 - **Data Science & ML:** PyTorch, Transformers, Scikit-learn, XGBoost, Prophet, Pandas, Jupyter
 - **Deployment:** Hugging Face Spaces
 
+---
+
 ## 🗺️ Repository Navigation
 
 This monorepo contains all the code and assets for the DisasterInsight AI platform. Here's a guide to the key directories:
 
-| Folder                        | Description                                                                                      |
-|-------------------------------|--------------------------------------------------------------------------------------------------|
-| disaster-insight-frontend     | The production-grade React frontend application. This is the main user interface.               |
-| disaster-insight-api          | The high-performance FastAPI backend that serves the AI models.                                 |
-| notebooks                     | The Jupyter Notebooks detailing the R&D, training, and evaluation of all four AI models.        |
-| models                        | The central "model registry" containing the final, serialized model files ready for deployment. |
-| data                          | Instructions and links to download the datasets used for model training. (Data files are not included). |
-| legacy_streamlit_ui          | The initial proof-of-concept dashboard built with Streamlit. Kept for historical/development reference. |
-| visuals                       | A repository of charts and plots generated during the data analysis and model evaluation phases. |
+| Folder                    | Description                                                                                      |
+|---------------------------|--------------------------------------------------------------------------------------------------|
+| data                      | Instructions and links to download the datasets used for model training. (Data files are not included). |
+| disaster-insight-api      | The high-performance FastAPI backend that serves the AI models.                                 |
+| disaster-insight-frontend | The production-grade React frontend application. This is the main user interface.               |
+| legacy_streamlit_ui       | The initial proof-of-concept dashboard built with Streamlit. Kept for historical/development reference. |
+| models                    | The central "model registry" containing the final, serialized model files ready for deployment. |
+| notebooks                 | The Jupyter Notebooks detailing the R&D, training, and evaluation of all four AI models.        |
+| visuals                   | A repository of charts and plots generated during the data analysis and model evaluation phases. |
+
+---
 
 ## ⚙️ Setup & Installation
 
 To run the entire platform locally, you will need to set up the backend and frontend separately.
 
-### Prerequisites
+### **Prerequisites**
 - Git
 - Conda / Python 3.9+
 - Node.js 16+
 
-### 1. Set Up the Data & Models
+### **1. Set Up the Data & Models**
 The models and notebooks require training data which is not included in this repo.
 
-➡️ Follow the instructions in the `data/README.md` to download the necessary datasets. The trained models are located in the `models/` directory.
+➡️ Follow the instructions in the [data/README.md](data/README.md) to download the necessary datasets. The trained models are located in the `models/` directory.
 
-### 2. Run the Backend API
+### **2. Run the Backend API**
 The backend API serves the models from the models directory.
 
-➡️ Follow the setup instructions in the `disaster-insight-api/README.md` to run the FastAPI server.
+➡️ Follow the setup instructions in the [disaster-insight-api/README.md](disaster-insight-api/README.md) to run the FastAPI server.
 
-### 3. Run the Frontend Dashboard
+### **3. Run the Frontend Dashboard**
 The frontend is the user-facing application.
 
-➡️ Follow the setup instructions in the `disaster-insight-frontend/README.md` to run the React app.
+➡️ Follow the setup instructions in the [disaster-insight-frontend/README.md](disaster-insight-frontend/README.md) to run the React app.
+
+---
+
+## 👨‍💻 About the Creator
+
+**Muhammad Zain**  
+*Data Scientist | AI Engineer | Applied ML Developer | LLM Developer*
+
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/zainafxal)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/zainafxal)
+[![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/zainafxal)
+[![Kaggle](https://img.shields.io/badge/Kaggle-20BEFF?style=for-the-badge&logo=kaggle&logoColor=white)](https://www.kaggle.com/zainafxal)
+[![Hugging Face](https://img.shields.io/badge/HuggingFace-FFD21F?style=for-the-badge&logo=huggingface&logoColor=black)](https://huggingface.co/zainafxal)
+
+---
 
 ## 📚 Datasets & Credits
 
 The AI models in this project were trained on several publicly available datasets. We are grateful to the creators and maintainers of these resources.
 
-➡️ For a complete list of datasets, sources, and their respective licenses, please see the `data/README.md`.
+➡️ For a complete list of datasets, sources, and their respective licenses, please see the [data/README.md](data/README.md).
 
 ## 📜 License
 
@@ -129,5 +149,5 @@ The source code for this project is licensed under the Apache License 2.0.
 
 Please see the LICENSE file for the full text. This permissive license allows for commercial and non-commercial use, modification, and distribution.
 
-### A Note on Data Licenses:
-The datasets used to train the models are subject to their own original licenses, some of which are non-commercial. Please refer to the `data/README.md` for detailed information on data sources and their respective terms of use before using them for any purpose.
+### **A Note on Data Licenses:**
+The datasets used to train the models are subject to their own original licenses, some of which are non-commercial. Please refer to the [data/README.md](data/README.md) for detailed information on data sources and their respective terms of use before using them for any purpose.

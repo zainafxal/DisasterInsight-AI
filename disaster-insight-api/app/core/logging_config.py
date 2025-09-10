@@ -1,11 +1,14 @@
 import logging
 import sys
 from pathlib import Path
+import os
 
-# Define the base directory of the project
+# Base directory of project
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-LOGS_DIR = BASE_DIR / "logs"
-LOGS_DIR.mkdir(exist_ok=True) # Create logs directory if it doesn't exist
+
+# Use environment variable LOGS_DIR if set, otherwise default
+LOGS_DIR = Path(os.environ.get("LOGS_DIR", BASE_DIR / "logs"))
+LOGS_DIR.mkdir(parents=True, exist_ok=True)
 
 # --- Logging Configuration ---
 LOGGING_CONFIG = {
@@ -33,18 +36,18 @@ LOGGING_CONFIG = {
         },
     },
     "loggers": {
-        "app": {  # Logger for our application
+        "app": {
             "handlers": ["console", "file"],
             "level": "INFO",
             "propagate": False,
         },
-        "uvicorn": { # Logger for the server
+        "uvicorn": {
             "handlers": ["console", "file"],
             "level": "INFO",
             "propagate": False,
         },
     },
-    "root": { # Root logger
+    "root": {
         "handlers": ["console", "file"],
         "level": "WARNING"
     }

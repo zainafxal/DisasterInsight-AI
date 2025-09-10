@@ -1,0 +1,26 @@
+# Python artifacts
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+
+# Git / metadata
+.git
+.gitignore
+
+# Logs / local files
+logs
+*.log
+.env
+.env.*
+
+# Notebook + data
+.ipynb_checkpoints
+*.ipynb
+data
+*.csv
+*.zip
+
+# OS
+.DS_Store
+Thumbs.db

@@ -4,6 +4,7 @@ channels:
   - conda-forge
   - defaults
 dependencies:
+  # Core
   - python=3.10
   - pip
   - numpy=1.24.3
@@ -14,10 +15,19 @@ dependencies:
   - openpyxl=3.1.2
   - matplotlib=3.7.3
   - plotly=5.18.0
+
+  # PyTorch CPU-only build (from pytorch channel)
   - pytorch=2.1.2
   - torchvision=0.16.2
   - torchaudio=2.1.2
-  - cpuonly  # Now this will work from pytorch channel
+  - cpuonly
+
+  # System utilities (Prophet sometimes needs compilers)
+  - gcc_linux-64  # only on Linux
+  - gxx_linux-64  # only on Linux
+  - make          # build tools
+
+  # Pip dependencies
   - pip:
       - fastapi==0.104.1
       - uvicorn[standard]==0.24.0

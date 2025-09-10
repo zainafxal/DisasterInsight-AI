@@ -140,13 +140,26 @@ The application should now be running at `http://localhost:3000`.
 
 ### Frontend
 *   **Framework:** [React](https://reactjs.org/)
-*   **Styling:** [Tailwind CSS / Material-UI / etc.] - *Specify your styling library*
-*   **Data Visualization:** [Chart.js / D3.js / etc.] - *Specify your charting library*
+*   **Styling:** [Tailwind CSS / Material-UI / etc.]
+*   **Data Visualization:** [Chart.js / D3.js / etc.]
 *   **API Client:** [Axios / Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
 
 ### Backend
 *   The backend is a separate [FastAPI](https://fastapi.tiangolo.com/) service.
 *   **Deployment:** Hosted on [Hugging Face Spaces](https://huggingface.co/spaces) with Docker.
+
+---
+
+## 👨‍💻 About the Creator
+
+**Muhammad Zain**  
+*Data Scientist | AI Engineer | Applied ML Developer | LLM Developer*
+
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/zainafxal)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/zainafxal)
+[![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/zainafxal)
+[![Kaggle](https://img.shields.io/badge/Kaggle-20BEFF?style=for-the-badge&logo=kaggle&logoColor=white)](https://www.kaggle.com/zainafxal)
+[![Hugging Face](https://img.shields.io/badge/HuggingFace-FFD21F?style=for-the-badge&logo=huggingface&logoColor=black)](https://huggingface.co/zainafxal)
 
 ---
 

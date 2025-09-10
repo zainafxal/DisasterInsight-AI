@@ -34,6 +34,77 @@ This API serves as the backend for the official DisasterInsight AI web applicati
 
 ---
 
+## 🛠️ Getting Started: Running Locally
+
+Follow these instructions to get the API server up and running on your local machine for development. The required AI models are already included in this repository.
+
+### **Prerequisites**
+
+*   Git
+*   [Conda](https://docs.conda.io/en/latest/miniconda.html) (Recommended) or Python 3.9+ with `venv`
+
+### **1. Clone the Repository**
+
+First, clone the entire project repository (if you haven't already) and navigate into this API directory.
+
+```bash
+git clone https://github.com/your-username/DisasterInsight-AI.git
+cd DisasterInsight-AI/disaster-insight-api
+```
+
+### **2. Set Up the Environment**
+
+You can use either Conda (recommended for handling complex ML dependencies) or `Pip`.
+
+#### **Option A (Recommended):** Using Conda
+
+Create and activate the Conda environment from the provided YAML file. This will install all dependencies, including PyTorch.
+
+```bash
+# Create the environment
+conda env create -f environment.yml
+
+# Activate the environment
+conda activate disaster-insight-api-env
+```
+
+#### **Option B:** Using Pip and a Virtual Environment
+
+If you prefer not to use Conda, you can use venv and pip.
+
+```bash
+# Create a virtual environment
+python -m venv venv
+
+# Activate it
+# On macOS/Linux:
+source venv/bin/activate
+# On Windows:
+.\venv\Scripts\activate
+
+# Install the required packages
+pip install -r requirements.txt
+```
+
+### **3. Run the API Server**
+
+Once the environment is activated, start the Uvicorn server:
+
+```bash
+uvicorn main:app --reload
+
+# or you can run main.py file in root directory (disaster-insight-api)
+```
+
+
+The API will now be running locally.
+
+*   🚀 **API URL:** http://127.0.0.1:8000
+    
+*   📚 **Interactive Docs:** http://127.0.0.1:8000/docs
+
+---
+
 ## 📦 Models Served
 
 This API provides access to four pre-trained models:
@@ -61,6 +132,19 @@ This API provides access to four pre-trained models:
 *   **Framework:** FastAPI, Uvicorn
 *   **ML Libraries:** Transformers, PyTorch, Scikit-learn, XGBoost, Prophet
 *   **Deployment:** Hugging Face Spaces (via Docker)
+
+---
+
+## 👨‍💻 About the Creator
+
+**Muhammad Zain**  
+*Data Scientist | AI Engineer | Applied ML Developer | LLM Developer*
+
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/zainafxal)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/zainafxal)
+[![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/zainafxal)
+[![Kaggle](https://img.shields.io/badge/Kaggle-20BEFF?style=for-the-badge&logo=kaggle&logoColor=white)](https://www.kaggle.com/zainafxal)
+[![Hugging Face](https://img.shields.io/badge/HuggingFace-FFD21F?style=for-the-badge&logo=huggingface&logoColor=black)](https://huggingface.co/zainafxal)
 
 ---
 

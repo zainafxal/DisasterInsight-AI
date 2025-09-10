@@ -1,13 +1,14 @@
 name: streamlit_env
 channels:
-  - defaults
   - conda-forge
+  - defaults
 dependencies:
-  - python=3.10  # or the version you're using
+  - python=3.10
   - pip
   - pip:
       - numpy==1.26.4
-      - pandas==2.3.1
-      - plotly==6.2.0
-      - requests==2.32.4
-      - streamlit==1.47.0
+      - pandas==2.2.2
+      - plotly==6.0.0
+      - requests==2.32.3
+      - streamlit==1.36.0
+      - python-dotenv==1.0.1

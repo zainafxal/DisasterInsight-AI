@@ -1,8 +1,8 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from './contexts/ThemeContext';
-import { Toaster } from 'react-hot-toast';
+//import { Toaster } from 'react-hot-toast';
 import { useTheme } from './hooks/useTheme';
 import MainLayout from './layouts/MainLayout';
 import Dashboard from './pages/Dashboard';
@@ -53,17 +53,18 @@ function AppContent() {
     <MuiThemeProvider theme={muiTheme}>
       <CssBaseline />
       <Router>
-        <Toaster
-          position="top-right"
-          toastOptions={{
-            duration: 4000,
-            style: {
-              background: theme === 'dark' ? '#1a1a1a' : '#ffffff',
-              color: theme === 'dark' ? '#fafafa' : '#111827',
-              border: `1px solid ${theme === 'dark' ? '#27272a' : '#e5e7eb'}`,
-            },
-          }}
-        />
+        {/* <Toaster
+            position="top-right"
+            toastOptions={{
+              duration: 4000,
+              style: {
+                background: theme === 'dark' ? '#1a1a1a' : '#ffffff',
+                color: theme === 'dark' ? '#fafafa' : '#111827',
+                border: `1px solid ${theme === 'dark' ? '#27272a' : '#e5e7eb'}`,
+              },
+            }}
+          /> */}
+
         <MainLayout>
           <Routes>
             <Route path="/" element={<Dashboard />} />

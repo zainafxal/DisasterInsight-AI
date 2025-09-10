@@ -1,0 +1,10 @@
+---
+title: DisasterInsight AI
+emoji: "🌎"
+colorFrom: red
+colorTo: orange
+sdk: static
+pinned: false
+license: apache-2.0
+app_file: index.html
+---

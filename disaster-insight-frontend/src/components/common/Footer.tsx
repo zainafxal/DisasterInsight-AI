@@ -13,6 +13,9 @@ import { useTheme } from '../../hooks/useTheme';
 import { motion } from 'framer-motion';
 import styles from './Footer.module.css';
 import { api } from '../../api/client';
+import logoIconLight from '../../assets/logos/logo-icon.svg';
+import logoIconDark from '../../assets/logos/logo-icon-white.svg';
+
 
 // Define the interface for the footer link objects
 interface FooterLink {
@@ -68,10 +71,11 @@ export default function Footer() {
             <Box className={styles.brandSection}>
               <Box className={styles.brand}>
                 <img
-                  src={`/src/assets/logos/logo-icon${theme === 'dark' ? '-white' : ''}.svg`}
+                  src={theme === 'dark' ? logoIconDark : logoIconLight}
                   alt="DisasterInsight AI"
                   className={styles.logo}
                 />
+
                 <Box>
                   <Typography variant="h6" className={styles.brandName}>
                     DisasterInsight AI

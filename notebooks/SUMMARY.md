@@ -33,7 +33,7 @@ The workflow is designed to be sequential, with each notebook producing a model 
   2. Filters the dataset to begin from **1970-01-01** to ensure model serialization is compatible across all operating systems.
   3. Engineers a time-series target by filtering for significant earthquakes (Magnitude >= 6.0) and aggregating their counts monthly.
   4. Trains a **Prophet** time-series model to capture long-term trends and seasonality.
-  5. Rigorously evaluates the forecast using time-series cross-validation, yielding a reliable **Mean Absolute Error (MAE)** of **[UPDATE THIS VALUE]** earthquakes/month.
+  5. Rigorously evaluates the forecast using time-series cross-validation, yielding a reliable **Mean Absolute Error (MAE)** of **4.33** earthquakes/month.
 
 - **Key Output:** A saved Prophet model (.json) and its corresponding forecast data (.csv) located in `models/03_earthquake_forecaster/`.
 

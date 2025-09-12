@@ -78,6 +78,7 @@ export default function Dashboard() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [apiOnline, setApiOnline] = useState<boolean | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [isSmallMobile, setIsSmallMobile] = useState(false);
   const [stats, setStats] = useState({
     activeAlerts: 0,
     regionsMonitored: 0,
@@ -88,6 +89,7 @@ export default function Dashboard() {
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
+      setIsSmallMobile(window.innerWidth <= 576);
     };
 
     handleResize();
@@ -206,7 +208,13 @@ export default function Dashboard() {
     <div className={styles.container}>
       <motion.div variants={containerVariants} initial="hidden" animate="visible">
         {/* Hero Section */}
-        <motion.div className={styles.hero} variants={itemVariants}>
+        <motion.div 
+            className={styles.hero} 
+            variants={itemVariants}
+            style={{
+              marginTop: isSmallMobile ? '52px' : undefined // push the whole hero section down
+            }}
+          >
           <div className={styles.heroBackground}>
             <div className={styles.heroGlow} />
             <div className={styles.heroPattern} />
@@ -228,30 +236,35 @@ export default function Dashboard() {
               </span>
             </div>
 
-            <h1 className={styles.title} style={{ whiteSpace: isMobile ? 'nowrap' : 'normal' }}>
-              Welcome to <span className={styles.brandName}>DisasterInsight AI</span>
-            </h1>
-            <p className={styles.subtitle} style={{ whiteSpace: isMobile ? 'nowrap' : 'normal', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-              Real-Time Global Disaster Analytics Powered by AI
-            </p>
-            <p className={styles.description} style={{ whiteSpace: isMobile ? 'nowrap' : 'normal', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-              Transforming data streams into actionable intelligence for crisis response
-            </p>
+            <h1 className={styles.title}>
+            Welcome to <span className={styles.brandName}>DisasterInsight AI</span>
+          </h1>
 
-            <div className={styles.heroStats} style={{ flexWrap: isMobile ? 'nowrap' : 'wrap', overflowX: 'auto' }}>
-              <div className={styles.heroStat} style={{ flexShrink: 0 }}>
-                <AutoAwesomeRounded />
-                <span>AI-Powered</span>
-              </div>
-              <div className={styles.heroStat} style={{ flexShrink: 0 }}>
-                <MonitorHeartRounded />
-                <span>24/7 Monitoring</span>
-              </div>
-              <div className={styles.heroStat} style={{ flexShrink: 0 }}>
-                <LanguageRounded />
-                <span>Global Coverage</span>
-              </div>
+          <p className={styles.subtitle}>
+            Real-Time Global Disaster Analytics Powered by AI
+          </p>
+
+          <p className={styles.description}>
+            Transforming data streams into actionable intelligence for crisis response
+          </p>
+
+          <div className={styles.heroStats}>
+            <div className={styles.heroStat}>
+              <AutoAwesomeRounded />
+              <span>AI-Powered</span>
             </div>
+            <div className={styles.heroStat}>
+              <MonitorHeartRounded />
+              <span>24/7 Monitoring</span>
+            </div>
+            <div className={styles.heroStat}>
+              <LanguageRounded />
+              <span>Global Coverage</span>
+            </div>
+          </div>
+
+
+
           </div>
         </motion.div>
 

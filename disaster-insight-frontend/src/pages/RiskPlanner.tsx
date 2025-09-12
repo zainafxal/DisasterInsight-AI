@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ErrorOutline } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import {
   Box,
@@ -23,7 +24,9 @@ import {
   Stepper,
   Step,
   StepLabel,
-  StepContent} from '@mui/material';
+  StepContent,
+  useMediaQuery
+} from '@mui/material';
 import {
   Assessment,
   Warning,
@@ -70,6 +73,9 @@ export default function RiskPlanner() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<RiskAssessment | null>(null);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
+
+  // ✅ Detect very small screens
+  const isSmallmobile = useMediaQuery('(max-width:576px)');
 
   const steps = [
     {
@@ -172,38 +178,44 @@ export default function RiskPlanner() {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className={styles.container}
-    >
-      {/* Header */}
-      <Box className={styles.header}>
-        <Box className={styles.headerContent}>
-          <SecurityRounded className={styles.pageIcon} />
-          <Box>
-            <Typography variant="h3" className={styles.title}>
-              Event Risk Scenario Planner
-            </Typography>
-            <Typography variant="body1" className={styles.subtitle}>
-              AI-powered disaster risk assessment using historical pattern analysis
-            </Typography>
-          </Box>
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    className={styles.container} // ✅ no need for conditional mobileContainer
+  >
+    {/* Header */}
+    <Box className={styles.header}>
+      <Box className={styles.headerContent}>
+        <SecurityRounded className={styles.pageIcon} />
+        <Box>
+          <Typography 
+            variant="h3" 
+            className={styles.title} // ✅ no need for mobileTitle
+          >
+            Event Risk Scenario Planner
+          </Typography>
+          <Typography 
+            variant="body1" 
+            className={styles.subtitle} // ✅ no need for mobileSubtitle
+          >
+            AI-powered disaster risk assessment using historical pattern analysis
+          </Typography>
         </Box>
-        
-        <Box className={styles.badges}>
-          <Chip
+      </Box>
+
+      <Box className={styles.badges}>
+        <Chip
           icon={<AnalyticsRounded className={styles.boltIcon} />}
           label="XGBoost ML Model"
-          className={styles.modelBadge}
+          className={styles.modelBadge} // ✅ simplified
         />
         <Chip
           icon={<PublicRounded className={styles.globeIcon} />}
           label="20K+ Events Analyzed"
-          className={styles.dataBadge}
+          className={styles.dataBadge} // ✅ simplified
         />
-        </Box>
       </Box>
+    </Box>
 
       <Grid container spacing={3}>
         <Grid item xs={12} lg={8}>
@@ -440,89 +452,168 @@ export default function RiskPlanner() {
                     Risk Assessment Results
                   </Typography>
                   
-                  <Box className={styles.riskDisplay}>
-                    <Box className={styles.riskMeter}>
-                      <Box className={styles.riskCircle}>
-                        <CircularProgress
-                          variant="determinate"
-                          value={result.high_risk_probability * 100}
-                          size={160}
-                          thickness={3}
-                          className={styles.riskProgress}
-                          style={{
-                            color: getRiskLevel(result.high_risk_probability).color
-                          }}
-                        />
-                        <Box className={styles.riskValue}>
-                          <Typography variant="h2" className={styles.riskPercent}>
-                            {(result.high_risk_probability * 100).toFixed(0)}%
-                          </Typography>
-                          <Typography variant="caption" className={styles.riskLabel}>
-                            Probability
-                          </Typography>
-                        </Box>
-                      </Box>
-                      
-                      <Chip
-                        icon={<Warning />}
-                        label={getRiskLevel(result.high_risk_probability).label}
-                        className={styles.riskChip}
+                  <Box
+                  className={styles.riskDisplay}
+                  style={{
+                    flexDirection: isSmallmobile ? 'column' : 'row',
+                    alignItems: isSmallmobile ? 'center' : 'flex-start',
+                    textAlign: isSmallmobile ? 'center' : 'left',
+                    gap: isSmallmobile ? '1.5rem' : '2rem',
+                  }}
+                >
+                  {/* Circle + % */}
+                  <Box
+                    className={styles.riskMeter}
+                    style={{
+                      alignItems: 'center',
+                      display: 'flex',
+                      flexDirection: 'column',
+                    }}
+                  >
+                    <Box
+                    className={styles.riskCircle}
+                    style={{
+                      position: 'relative',
+                      width: isSmallmobile ? 80 : 160,
+                      height: isSmallmobile ? 80 : 160,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <CircularProgress
+                      variant="determinate"
+                      value={result.high_risk_probability * 100}
+                      size={isSmallmobile ? 80 : 160}
+                      thickness={3}
+                      style={{
+                        color: getRiskLevel(result.high_risk_probability).color,
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                      }}
+                    />
+                    <Box
+                      style={{
+                        textAlign: 'center',
+                        zIndex: 1,
+                      }}
+                    >
+                      <Typography
+                        variant={isSmallmobile ? 'h6' : 'h2'}
+                        className={styles.riskPercent}
                         style={{
-                          backgroundColor: getRiskLevel(result.high_risk_probability).bgColor,
-                          color: getRiskLevel(result.high_risk_probability).color,
-                          border: `1px solid ${getRiskLevel(result.high_risk_probability).color}`
+                          fontSize: isSmallmobile ? '1.25rem' : '2.25rem',
+                          fontWeight: 700,
                         }}
-                      />
-                    </Box>
-                    
-                    <Box className={styles.riskInfo}>
-                      <Alert 
-                        severity={
-                          result.high_risk_probability > 0.75 ? 'error' :
-                          result.high_risk_probability > 0.5 ? 'warning' :
-                          result.high_risk_probability > 0.25 ? 'info' : 'success'
-                        }
-                        className={styles.riskAlert}
                       >
-                        <Typography variant="subtitle2" gutterBottom>
-                          {getRiskLevel(result.high_risk_probability).description}
+                        {(result.high_risk_probability * 100).toFixed(0)}%
+                      </Typography>
+                      <Typography variant="caption" className={styles.riskLabel}>
+                        Probability
+                      </Typography>
+                    </Box>
+                  </Box>
+
+
+                    <Chip
+                      
+                      label={getRiskLevel(result.high_risk_probability).label}
+                      className={styles.riskChip}
+                      style={{
+                        backgroundColor: getRiskLevel(result.high_risk_probability).bgColor,
+                        color: getRiskLevel(result.high_risk_probability).color,
+                        border: `1px solid ${getRiskLevel(result.high_risk_probability).color}`,
+                        marginTop: '0.75rem',
+                      }}
+                    />
+                  </Box>
+
+                  {/* Risk info box */}
+                  <Box
+                    className={styles.riskInfo}
+                    style={{
+                      width: isSmallmobile ? '100%' : 'auto',
+                      maxWidth: isSmallmobile ? '100%' : 'none',
+                    }}
+                  >
+                    <Alert
+                      severity={
+                        result.high_risk_probability > 0.75
+                          ? 'error'
+                          : result.high_risk_probability > 0.5
+                          ? 'warning'
+                          : result.high_risk_probability > 0.25
+                          ? 'info'
+                          : 'success'
+                      }
+                      icon={
+                        result.high_risk_probability > 0.75 ? (
+                          <ErrorOutline fontSize="inherit" />
+                        ) : (
+                          <Warning fontSize="inherit" />
+                        )
+                      }
+                      className={styles.riskAlert}
+                      style={{
+                        textAlign: isSmallmobile ? 'center' : 'left',
+                        display: 'flex',
+                        alignItems: 'center',
+                        flexDirection: isSmallmobile ? 'column' : 'row',
+                        gap: '0.5rem',
+                        fontSize: 18,  // control icon and text size together
+                      }}
+                    >
+                      <Box style={{ flex: 1 }}>
+                        <Typography
+                          variant="subtitle2"
+                          gutterBottom
+                          style={{
+                            fontWeight: 600,
+                            marginBottom: '0.25rem',
+                          }}
+                        >
+                          Immediate action required
                         </Typography>
                         <Typography variant="body2">
                           Based on historical patterns, this scenario has a{' '}
                           <strong>{(result.high_risk_probability * 100).toFixed(1)}%</strong>{' '}
                           probability of becoming a high-impact event ({'>'}10 fatalities).
                         </Typography>
-                      </Alert>
+                      </Box>
+                    </Alert>
 
-                      {result.risk_factors && (
-                        <Box className={styles.factors}>
-                          <Typography variant="subtitle1" className={styles.factorsTitle}>
-                            <TrendingUpRounded /> Contributing Risk Factors
-                          </Typography>
-                          {Object.entries(result.risk_factors).map(([factor, weight]) => (
-                            <Box key={factor} className={styles.factor}>
-                              <Box className={styles.factorHeader}>
-                                <Typography variant="body2" className={styles.factorName}>
-                                  {factor.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
-                                </Typography>
-                                <Typography variant="caption" className={styles.factorWeight}>
-                                  {(weight * 100).toFixed(0)}%
-                                </Typography>
-                              </Box>
-                              <LinearProgress
-                                variant="determinate"
-                                value={weight * 100}
-                                className={styles.factorBar}
-                                style={{
-                                  backgroundColor: 'var(--color-bg-secondary)'
-                                }}
-                              />
+                    {result.risk_factors && (
+                      <Box className={styles.factors}>
+                        <Typography variant="subtitle1" className={styles.factorsTitle}>
+                          <TrendingUpRounded /> Contributing Risk Factors
+                        </Typography>
+                        {Object.entries(result.risk_factors).map(([factor, weight]) => (
+                          <Box key={factor} className={styles.factor}>
+                            <Box className={styles.factorHeader}>
+                              <Typography variant="body2" className={styles.factorName}>
+                                {factor
+                                  .replace(/_/g, ' ')
+                                  .replace(/\b\w/g, (l) => l.toUpperCase())}
+                              </Typography>
+                              <Typography variant="caption" className={styles.factorWeight}>
+                                {(weight * 100).toFixed(0)}%
+                              </Typography>
                             </Box>
-                          ))}
-                        </Box>
-                      )}
-                    </Box>
+                            <LinearProgress
+                              variant="determinate"
+                              value={weight * 100}
+                              className={styles.factorBar}
+                              style={{
+                                backgroundColor: 'var(--color-bg-secondary)',
+                              }}
+                            />
+                          </Box>
+                        ))}
+                      </Box>
+                    )}
                   </Box>
+                </Box>
                 </motion.div>
               )}
             </CardContent>

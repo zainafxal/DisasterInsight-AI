@@ -23,6 +23,7 @@ import {
   TrendingUpRounded,
   NotificationsRounded,
   SettingsRounded,
+  MenuRounded, 
 } from '@mui/icons-material';
 import { useTheme } from '../../hooks/useTheme';
 import logoLight from '../../assets/logos/logo-light.svg';
@@ -80,6 +81,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const isMobile = useMediaQuery('(max-width: 768px)');
+  const isSmallMobile = useMediaQuery('(max-width: 576px)');
   const isTablet = useMediaQuery('(max-width: 1024px)');
   
   // State for Notifications Popover
@@ -162,127 +164,142 @@ export default function Header() {
             />
           </Link>
 
-          <nav className={styles.nav}>
-            <AnimatePresence>
-              {navItems.map((item, index) => {
-                const Icon = item.icon;
-                const isActive = location.pathname === item.path;
-                
-                return (
-                  <motion.div
-                    key={item.path}
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <Tooltip 
-                      title={item.description} 
-                      placement="bottom"
-                      arrow
-                      enterDelay={500}
-                    >
-                      <Link
-                        to={item.path}
-                        className={`${styles.navLink} ${isActive ? styles.active : ''}`}
-                        style={{ padding: isMobile ? '12px 16px' : undefined }}
+          {!isSmallMobile && (
+              <nav className={styles.nav}>
+                <AnimatePresence>
+                  {navItems.map((item, index) => {
+                    const Icon = item.icon;
+                    const isActive = location.pathname === item.path;
+                    
+                    return (
+                      <motion.div
+                        key={item.path}
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.1 }}
                       >
-                        <Icon 
-                          className={styles.navIcon} 
-                          style={{ fontSize: isMobile ? '28px' : '24px' }}
-                        />
-                        <span className={styles.navLabel}>{item.label}</span>
-                        {isActive && (
-                          <motion.div
-                            className={styles.activeIndicator}
-                            layoutId="activeNav"
-                            transition={{ 
-                              type: "spring", 
-                              stiffness: 500, 
-                              damping: 30 
+                        <Tooltip 
+                          title={item.description} 
+                          placement="bottom"
+                          arrow
+                          enterDelay={500}
+                        >
+                          <Link
+                            to={item.path}
+                            className={`${styles.navLink} ${isActive ? styles.active : ''}`}
+                            style={{
+                              padding: isMobile ? '12px 16px' : undefined
                             }}
-                          />
-                        )}
-                      </Link>
-                    </Tooltip>
-                  </motion.div>
-                );
-              })}
-            </AnimatePresence>
-          </nav>
+                          >
+                            <Icon 
+                              className={styles.navIcon} 
+                              style={{ fontSize: isMobile ? '28px' : '24px' }}
+                            />
+                            <span className={styles.navLabel}>{item.label}</span>
+                            {isActive && (
+                              <motion.div
+                                className={styles.activeIndicator}
+                                layoutId="activeNav"
+                                transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                              />
+                            )}
+                          </Link>
+                        </Tooltip>
+                      </motion.div>
+                    );
+                  })}
+                </AnimatePresence>
+              </nav>
+            )}
+
 
           <div className={styles.actions}>
-            <>
-              <Tooltip title="Notifications">
-                <IconButton className={styles.actionBtn} onClick={handleNotificationsClick}>
-                  <Badge 
-                    badgeContent={loadingEarthquakes ? 0 : earthquakeData.length} 
-                    color="error"
-                    sx={{
-                      '& .MuiBadge-badge': {
-                        fontSize: '0.625rem',
-                        height: '16px',
-                        minWidth: '16px',
-                      }
-                    }}
-                  >
-                    <NotificationsRounded />
-                  </Badge>
-                </IconButton>
-              </Tooltip>
-              <Popover
-                open={openNotifications}
-                anchorEl={notificationsAnchorEl}
-                onClose={handleNotificationsClose}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'right',
-                }}
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
+          <>
+            {/* Notifications (always shown) */}
+            <Tooltip title="Notifications">
+              <IconButton 
+                className={styles.actionBtn} 
+                onClick={handleNotificationsClick}
+                sx={{
+                  padding: isSmallMobile ? '4px' : '8px'
                 }}
               >
-                <div style={{ padding: '16px', maxWidth: '300px' }}>
-                  <h3 style={{ margin: '0 0 8px', fontSize: '1.1rem' }}>Active Alerts</h3>
-                  {loadingEarthquakes ? (
-                    <p style={{ margin: 0, color: 'var(--color-text-secondary)' }}>Loading alerts...</p>
-                  ) : earthquakeData.length > 0 ? (
-                    <List disablePadding>
-                      {earthquakeData.map((quake) => (
-                        <div key={quake.id} style={{ marginBottom: '8px' }}>
-                          <p style={{ margin: 0, fontSize: '0.9rem', fontWeight: 600 }}>
-                            M {quake.properties.mag.toFixed(1)} - {quake.properties.place}
-                          </p>
-                        </div>
-                      ))}
-                    </List>
-                  ) : (
-                    <p style={{ margin: 0, color: 'var(--color-text-secondary)' }}>No major earthquakes in the last 24 hours.</p>
-                  )}
-                </div>
-              </Popover>
+                <Badge 
+                  badgeContent={loadingEarthquakes ? 0 : earthquakeData.length} 
+                  color="error"
+                  sx={{
+                    '& .MuiBadge-badge': {
+                      fontSize: isSmallMobile ? '0.5rem' : '0.625rem',
+                      height: isSmallMobile ? '14px' : '16px',
+                      minWidth: isSmallMobile ? '14px' : '16px',
+                    }
+                  }}
+                >
+                  <NotificationsRounded 
+                    sx={{ fontSize: isSmallMobile ? '20px' : '24px' }}
+                  />
+                </Badge>
+              </IconButton>
+            </Tooltip>
 
-              <Tooltip title="Settings">
-                <IconButton className={styles.actionBtn} onClick={handleSettingsClick}>
-                  <SettingsRounded />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                anchorEl={settingsAnchorEl}
-                open={openSettings}
-                onClose={handleSettingsClose}
-              >
-                <MenuItem onClick={handleSettingsClose} component="a" href="https://github.com/zainafxal" target="_blank">
-                  GitHub Repository
-                </MenuItem>
-                <MenuItem onClick={handleSettingsClose} component="a" href="http://127.0.0.1:8000/docs" target="_blank">
-                  API Documentation
-                </MenuItem>
-              </Menu>
-              
-              <div className={styles.divider} />
-            </>
-            
+            {/* Notifications popover (unchanged) */}
+            <Popover
+              open={openNotifications}
+              anchorEl={notificationsAnchorEl}
+              onClose={handleNotificationsClose}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+            >
+              <div style={{ padding: '16px', maxWidth: '300px' }}>
+                <h3 style={{ margin: '0 0 8px', fontSize: '1.1rem' }}>Active Alerts</h3>
+                {loadingEarthquakes ? (
+                  <p style={{ margin: 0, color: 'var(--color-text-secondary)' }}>Loading alerts...</p>
+                ) : earthquakeData.length > 0 ? (
+                  <List disablePadding>
+                    {earthquakeData.map((quake) => (
+                      <div key={quake.id} style={{ marginBottom: '8px' }}>
+                        <p style={{ margin: 0, fontSize: '0.9rem', fontWeight: 600 }}>
+                          M {quake.properties.mag.toFixed(1)} - {quake.properties.place}
+                        </p>
+                      </div>
+                    ))}
+                  </List>
+                ) : (
+                  <p style={{ margin: 0, color: 'var(--color-text-secondary)' }}>No major earthquakes in the last 24 hours.</p>
+                )}
+              </div>
+            </Popover>
+
+            {/* Settings */}
+            <Tooltip title="Settings">
+              <IconButton className={styles.actionBtn} onClick={handleSettingsClick}>
+                <SettingsRounded />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              anchorEl={settingsAnchorEl}
+              open={openSettings}
+              onClose={handleSettingsClose}
+            >
+              <MenuItem onClick={handleSettingsClose} component="a" href="https://github.com/zainafxal/DisasterInsight-AI" target="_blank">
+                GitHub Repository
+              </MenuItem>
+              <MenuItem onClick={handleSettingsClose} component="a" href="https://github.com/zainafxal/DisasterInsight-AI/tree/main/disaster-insight-api" target="_blank">
+                API Documentation
+              </MenuItem>
+            </Menu>
+
+            <div className={styles.divider} />
+          </>
+
+          {/* Theme toggle: only show in header when NOT small mobile */}
+          {!isSmallMobile && (
             <Tooltip title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}>
               <IconButton 
                 onClick={toggleTheme} 
@@ -315,7 +332,20 @@ export default function Header() {
                 </motion.div>
               </IconButton>
             </Tooltip>
-          </div>
+          )}
+
+          {/* Drawer toggle (hamburger) — visible on mobile & small mobile */}
+          {(isMobile || isSmallMobile) && (
+            <IconButton 
+              className={styles.menuBtn} 
+              onClick={handleDrawerToggle}
+              aria-label="Open navigation"
+            >
+              <MenuRounded sx={{ fontSize: isSmallMobile ? '22px' : '26px' }} />
+            </IconButton>
+          )}
+        </div>
+
         </div>
       </motion.header>
 
@@ -327,17 +357,53 @@ export default function Header() {
           sx: {
             backgroundColor: 'var(--color-surface)',
             color: 'var(--color-text)',
-            width: 320,
+            width: isSmallMobile ? 240 : 320, // narrower on tiny phones
             borderLeft: '1px solid var(--color-border)',
           }
         }}
       >
         <div className={styles.drawerHeader}>
-          <img 
-            src={theme === 'dark' ? logoIconDark : logoIconLight}
-            alt="DisasterInsight AI"
-            className={styles.drawerLogo}
-          />
+          {isSmallMobile ? (
+            <Tooltip title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}>
+              <IconButton 
+                onClick={toggleTheme} 
+                className={styles.themeToggle}
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  '& > div': {
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }
+                }}
+              >
+                <motion.div
+                  key={theme}
+                  initial={{ rotate: -180, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '100%',
+                    height: '100%'
+                  }}
+                >
+                  {theme === 'dark' ? <LightModeRounded /> : <DarkModeRounded />}
+                </motion.div>
+              </IconButton>
+            </Tooltip>
+          ) : (
+            <img 
+              src={theme === 'dark' ? logoIconDark : logoIconLight}
+              alt="DisasterInsight AI"
+              className={styles.drawerLogo}
+            />
+          )}
+
           <IconButton 
             onClick={handleDrawerToggle}
             className={styles.closeBtn}
@@ -345,20 +411,45 @@ export default function Header() {
             <CloseIcon />
           </IconButton>
         </div>
-        
+
         <List className={styles.drawerList}>
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = location.pathname === item.path;
-            
+
             return (
               <Link
                 key={item.path}
                 to={item.path}
+                onClick={handleDrawerToggle}  // 👈 closes drawer after navigation
                 className={`${styles.navLink} ${isActive ? styles.active : ''}`}
+                style={{
+                  padding: isSmallMobile 
+                    ? '12px 14px'   // more padding for touch
+                    : isMobile 
+                      ? '12px 16px'
+                      : undefined
+                }}
               >
-                <Icon className={styles.navIcon} />
-                <span className={styles.navLabel}>{item.label}</span>
+                <Icon 
+                  className={styles.navIcon} 
+                  style={{
+                    fontSize: isSmallMobile 
+                      ? '28px'   // bigger icons
+                      : isMobile 
+                        ? '24px'
+                        : '22px'
+                  }}
+                />
+                <span 
+                  className={styles.navLabel}
+                  style={{
+                    fontSize: isSmallMobile ? '1rem' : '0.9rem', // bigger text
+                    fontWeight: isSmallMobile ? 600 : 500
+                  }}
+                >
+                  {item.label}
+                </span>
                 {isActive && (
                   <motion.div
                     className={styles.activeIndicator}
@@ -376,17 +467,8 @@ export default function Header() {
             );
           })}
         </List>
-
-        <div className={styles.drawerFooter}>
-          <div className={styles.drawerActions}>
-            <IconButton className={styles.drawerActionBtn}>
-              <Badge badgeContent={3} color="error">
-                <NotificationsRounded />
-              </Badge>
-            </IconButton>
-          </div>
-        </div>
       </Drawer>
+
     </>
   );
 }

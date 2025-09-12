@@ -479,3 +479,59 @@
   font-size: 1rem;
   margin-right: 6px;
 }
+
+
+/* Small Hero Section Content for Small Mobile */
+
+@media (max-width: 576px) {
+  .title {
+    font-size: 1.875rem; /* 👈 main big heading */
+  }
+
+  .subtitle {
+    font-size: 0.84rem; /* 👈 second line below title */
+  }
+
+  .description {
+    font-size: 0.75rem; /* 👈 paragraph below subtitle */
+  }
+
+  .heroStat {
+    font-size: 0.675rem; /* 👈 text inside stat chips */
+    padding: 0.5rem 0.75rem; /* 👈 chip size */
+  }
+
+  .heroStat svg {
+    font-size: 1.125rem; /* 👈 icons inside the chips */
+  }
+
+  .heroBadge {
+    font-size: 0.75rem; /* 👈 "System Online / API Offline" badge */
+    padding: 0.35rem 0.75rem; /* 👈 badge height/width */
+  }
+
+  /* Section Header */
+.sectionHeader {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.sectionTitle {
+  font-size: 2.1rem !important;
+  font-weight: 800 !important;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.sectionSubtitle {
+  color: var(--color-text-secondary);
+  font-size: 1.125rem;
+  max-width: 600px;
+  margin: 0 auto !important;
+}
+
+}
+
+

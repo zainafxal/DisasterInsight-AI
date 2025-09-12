@@ -83,8 +83,12 @@
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .updateBadge {
@@ -327,39 +331,33 @@
     padding: 1rem;
     padding-top: 5rem;
   }
-  
+
   .title {
     font-size: 1.75rem !important;
   }
-  
+
   .statsGrid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
-  
+
   .statContent {
     flex-direction: column;
     text-align: center;
     padding: 1rem !important;
   }
-  
+
   .locationText {
     max-width: 150px;
   }
 }
 
-
 /* Dark mode fixes for LiveFeed */
-[data-theme="dark"] .statCard {
-  background: var(--color-surface) !important;
-}
-
+[data-theme="dark"] .statCard,
 [data-theme="dark"] .mapCard,
-[data-theme="dark"] .tableCard {
-  background: var(--color-surface) !important;
-}
-
-[data-theme="dark"] .tableContainer {
+[data-theme="dark"] .tableCard,
+[data-theme="dark"] .tableContainer,
+[data-theme="dark"] .customToast {
   background: var(--color-surface) !important;
 }
 
@@ -367,20 +365,8 @@
   background-color: var(--color-surface-hover) !important;
 }
 
-[data-theme="dark"] .customToast {
-  background: var(--color-surface) !important;
-  border-color: var(--color-border) !important;
-}
-
-
-/*
-  This is the final, definitive fix. It targets the specific
-  Material-UI classes within the dark theme selector to
-  guarantee the colors are not overridden.
-*/
-
 [data-theme="dark"] .magnitudeChip.MuiChip-root {
-  background-color: transparent !important; /* This is the problem */
+  background-color: transparent !important;
 }
 
 [data-theme="dark"] .magnitudeChip.MuiChip-root.MuiChip-colorSuccess {
@@ -398,4 +384,269 @@
 [data-theme="dark"] .magnitudeChip .MuiChip-label,
 [data-theme="dark"] .magnitudeChip .MuiChip-icon {
   color: #ffffff !important;
+}
+
+/* Extra small phones (≤355px) */
+@media (max-width: 355px) {
+  .container {
+    padding: 0.75rem;
+    padding-top: 4rem;
+  }
+
+  .pageIcon {
+    font-size: 1.75rem !important;
+  }
+
+  .title {
+    font-size: 1.35rem !important;
+  }
+
+  .subtitle {
+    font-size: 0.85rem;
+  }
+
+  .controls {
+    gap: 0.5rem;
+  }
+
+  .refreshChip {
+    font-size: 0.7rem !important;
+    padding: 0.25rem 0.5rem !important;
+  }
+
+  .updateBadge {
+    font-size: 0.7rem;
+    padding: 0.35rem 0.75rem;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .statContent {
+    gap: 1rem;
+    padding: 0.75rem !important;
+  }
+
+  .statIcon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .statIcon svg {
+    font-size: 1.35rem;
+  }
+
+  .statValue {
+    font-size: 1.35rem !important;
+  }
+
+  .statLabel {
+    font-size: 0.8rem;
+  }
+
+  .mapTitle,
+  .tableTitle {
+    font-size: 1rem !important;
+  }
+
+  .filterBtn {
+    font-size: 0.75rem !important;
+    padding: 0.25rem 0.75rem !important;
+  }
+
+  .locationText {
+    max-width: 120px;
+    font-size: 0.8rem;
+  }
+
+  .locationAvatar {
+    width: 28px;
+    height: 28px;
+  }
+
+  .magnitudeChip {
+    font-size: 0.75rem !important;
+    min-width: 50px;
+  }
+
+  .detailsBtn {
+    font-size: 0.75rem !important;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .customToast {
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .toastIcon {
+    font-size: 1.5rem;
+  }
+}
+
+/* === Small mobile overrides (<= 576px) === */
+@media (max-width: 576px) {
+  .container {
+    padding: 0.75rem !important;
+    padding-top: 5rem !important;
+  }
+
+  .headerContent {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .titleSection {
+    align-items: flex-start;
+  }
+
+  .pageIcon {
+    font-size: 2.25rem !important;
+  }
+
+  .title {
+    font-size: 1.5rem !important;
+  }
+
+  .subtitle {
+    font-size: 0.9rem !important;
+  }
+
+  .controls {
+    width: 100%;
+    justify-content: space-between;
+    /* ✅ FIX 1: Group buttons to the right */
+    display: flex; 
+  }
+
+  /* ✅ FIX 1: New wrapper to group the right-side buttons */
+  .controls > div:last-child {
+    display: flex;
+    align-items: center;
+  }
+  
+  .refreshChip {
+    padding: 0 0.5rem !important;
+  }
+
+  .refreshChip .MuiChip-label {
+    font-size: 0.75rem !important;
+  }
+
+  .updateBadge {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.75rem !important;
+  }
+  
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  /* ✅ FIX 2: Center content in stat cards */
+  .statCard {
+    padding: 1rem !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .statContent {
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+    gap: 0.5rem;
+  }
+  
+  /* ✅ FIX 2: Increase icon size */
+  .statIcon {
+    width: 44px;
+    height: 44px;
+    font-size: 1.5rem; /* Increased size */
+  }
+
+
+  .statValue {
+    font-size: 1.75rem !important;
+  }
+
+  .statLabel {
+    font-size: 0.8rem !important;
+  }
+
+  .mapHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .mapTitle,
+  .tableTitle {
+    font-size: 1.25rem !important;
+  }
+
+  .filterButtons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .filterBtn {
+    flex: 1;
+    font-size: 0.75rem !important;
+  }
+
+  .mapContainer {
+    height: 300px;
+  }
+  
+  .tableCard {
+    padding: 0 !important;
+  }
+  
+  .tableHeader {
+    padding: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .tableContainer {
+    overflow-x: auto;
+  }
+
+  .tableContainer :global(.MuiTableCell-root) {
+    padding: 0.75rem;
+    font-size: 0.8rem !important;
+    white-space: nowrap;
+  }
+
+  .locationCell {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .locationAvatar {
+    display: none;
+  }
+  
+  .locationText {
+    white-space: normal;
+    max-width: 150px;
+  }
+
+  .magnitudeChip {
+    font-size: 0.8rem !important;
+  }
+
+  .depthCell {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
 }

@@ -11,6 +11,7 @@ import SignalAnalysis from './pages/SignalAnalysis';
 import RiskPlanner from './pages/RiskPlanner';
 import Forecasts from './pages/Forecasts';
 import './styles/globals.css';
+import ScrollToTop from './components/common/ScrollToTop';
 
 function AppContent() {
   const { theme } = useTheme();
@@ -53,6 +54,7 @@ function AppContent() {
     <MuiThemeProvider theme={muiTheme}>
       <CssBaseline />
       <Router>
+        <ScrollToTop /> {/* ✅ MOVED TO HERE: Inside Router, before layouts and routes */}
         {/* <Toaster
             position="top-right"
             toastOptions={{

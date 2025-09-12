@@ -683,3 +683,673 @@
 }
 
 
+/* Small mobile override ≤576px */
+@media (max-width: 576px) {
+  .container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  padding-top: 6rem; /* Consistent top padding for all pages */
+  min-height: calc(100vh - 80px);
+}
+
+/* Header */
+.header {
+  margin-bottom: 2rem;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.pageIcon {
+  font-size: 3.5rem !important;
+  color: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 12px rgba(249, 115, 22, 0.3));
+}
+
+.title {
+  font-size: 2.5rem !important;
+  font-weight: 800 !important;
+  color: var(--color-text);
+  margin-bottom: 0.25rem;
+}
+
+.subtitle {
+  color: var(--color-text-secondary);
+  font-size: 1.125rem;
+}
+
+.badges {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.liveBadge {
+  background: rgba(16, 185, 129, 0.1) !important;
+  color: var(--color-success) !important;
+  border: 1px solid rgba(16, 185, 129, 0.2) !important;
+  font-weight: 600 !important;
+}
+
+.liveIcon {
+  font-size: 0.75rem !important;
+  animation: pulse 2s ease-in-out infinite;
+  color: #02972f !important;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.85; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.08); }
+  100% { opacity: 0.85; transform: scale(1); }
+}
+
+/* InsightsIcon icon (white) */
+.InsightsIcon {
+  color: #f1f5f2 !important; 
+}
+
+.modelBadge {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%) !important;
+  color: white !important;
+  font-weight: 600 !important;
+  padding: 0.5rem 1rem !important;
+}
+
+/* Tab Card */
+.tabCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md) !important;
+  overflow: hidden;
+}
+
+.tabHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-border);
+  padding-right: 1rem;
+}
+
+.tabs {
+  flex: 1;
+}
+
+.tab {
+  font-weight: 500 !important;
+  text-transform: none !important;
+  font-size: 1rem !important;
+  padding: 1rem 2rem !important;
+}
+
+.tab.Mui-selected {
+  color: var(--color-primary) !important;
+}
+
+.tab svg {
+  font-size: 1.25rem !important;
+}
+
+.tabActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.actionBtn {
+  color: var(--color-text-secondary);
+  transition: var(--transition-base);
+}
+
+.actionBtn:hover {
+  color: var(--color-primary);
+  background: rgba(249, 115, 22, 0.08);
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Section Header */
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700 !important;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+}
+
+.sectionTitle svg {
+  color: var(--color-primary);
+}
+
+.sectionDescription {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  max-width: 700px;
+}
+
+.forecastBadges {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Chart Container */
+.chartContainer {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid var(--color-border);
+}
+
+/* Custom Tooltip */
+.customTooltip {
+  padding: 0.75rem 1rem !important;
+  background: var(--color-surface) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-lg) !important;
+  max-width: max-content !important;
+  white-space: nowrap;
+}
+
+.tooltipTitle {
+  font-weight: 600 !important;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+}
+
+.tooltipItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+  white-space: nowrap; /* prevent wrapping */
+}
+
+.tooltipItem:last-child {
+  margin-bottom: 0;
+}
+
+.tooltipDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.tooltipText {
+  white-space: nowrap;
+}
+
+/* Legend wrapper: full chart width */
+.chartContainer :global(.recharts-legend-wrapper) {
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  transform: none !important;
+  pointer-events: auto !important; /* Allow tooltip hover/clicks */
+}
+
+/* Custom legend (one horizontal line, evenly spaced, centered) */
+.legendGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+  align-items: center;
+  justify-items: center; /* center each item within its third */
+  width: 100%;
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.legendDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.legendLabel {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+}
+
+/* Keep axes ticks themed */
+.chartContainer :global(.recharts-layer .recharts-cartesian-axis-tick text) {
+  fill: var(--color-text-secondary);
+}
+
+/* Insight Cards */
+.insightCards {
+  margin-bottom: 2rem;
+}
+
+.insightCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem !important;
+  background: var(--color-surface) !important;
+  border: 1px solid var(--color-border) !important;
+  transition: var(--transition-base);
+  height: 100%;
+  border-radius: var(--radius-full) !important;
+  overflow: hidden;
+}
+
+.insightCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.insightIcon {
+  font-size: 2.5rem !important;
+  opacity: 0.9;
+}
+
+.insightValue {
+  font-weight: 700 !important;
+  color: var(--color-text);
+  margin-bottom: 0.25rem;
+}
+
+.insightTitle {
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  font-size: 0.875rem !important;
+}
+
+.insightSubtitle {
+  color: var(--color-text-tertiary);
+  font-size: 0.75rem !important;
+}
+
+/* Alerts */
+.alert {
+  border-radius: var(--radius-lg) !important;
+  border: 1px solid rgba(59, 130, 246, 0.3) !important;
+}
+
+.warningAlert {
+  margin-bottom: 2rem;
+  border-radius: var(--radius-lg) !important;
+  background: rgba(245, 158, 11, 0.05) !important;
+}
+
+.regionChips {
+  display: flex;
+  gap: 0.5rem !important;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+:global(.MuiChip-root) {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  height: auto !important;
+}
+
+:global(.MuiChip-label) {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 12px !important;
+}
+
+.regionChip {
+  background: var(--color-warning) !important;
+  color: white !important;
+  font-weight: 600 !important;
+}
+
+/* Input Card */
+.inputCard {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md) !important;
+  margin-bottom: 2rem;
+}
+
+.inputTitle {
+  font-weight: 600 !important;
+  color: var(--color-text);
+  margin-bottom: 1.5rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.inputLabel {
+  font-weight: 500 !important;
+  color: var(--color-text);
+}
+
+.input {
+  background: var(--color-bg);
+}
+
+:global(.MuiOutlinedInput-notchedOutline) {
+  border-radius: var(--radius-lg) !important;
+}
+
+.sliderWrapper {
+  width: 100%;
+  padding: 0;
+}
+
+.slider {
+  color: var(--color-primary) !important;
+}
+
+.slider .MuiSlider-track {
+  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+}
+
+.slider .MuiSlider-thumb {
+  background: var(--color-primary);
+  border: 2px solid white;
+  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3);
+}
+
+.slider .MuiSlider-thumb:hover {
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
+}
+
+.inputHelp {
+  color: var(--color-text-tertiary);
+  font-style: italic;
+}
+
+.forecastActions {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.forecastButton {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%) !important;
+  color: white !important;
+  font-weight: 600 !important;
+  padding: 0.875rem 2.5rem !important;
+  border-radius: var(--radius-full) !important;
+  box-shadow: 0 4px 14px 0 rgba(249, 115, 22, 0.25) !important;
+  transition: var(--transition-base) !important;
+}
+
+.forecastButton:hover {
+  box-shadow: 0 6px 20px 0 rgba(249, 115, 22, 0.35) !important;
+  transform: translateY(-2px);
+}
+
+.forecastButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Regional Result */
+.regionalResult {
+  margin-top: 2rem;
+}
+
+.resultTitle {
+  font-weight: 700 !important;
+  color: var(--color-text);
+  margin-bottom: 1.5rem !important;
+  text-align: center;
+}
+
+.probabilityCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl) !important;
+  height: 100%;
+}
+
+.probabilityDisplay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.probabilityMeter {
+  position: relative;
+  display: inline-flex;
+}
+
+.probabilityCircle {
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+}
+
+.probabilityValue {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.probabilityPercent {
+  font-size: 3.5rem !important;
+  font-weight: 800 !important;
+  color: var(--color-text);
+  line-height: 1 !important;
+}
+
+.probabilityLabel {
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+.riskChip {
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+  padding: 0.75rem 1.5rem !important;
+  height: auto !important;
+}
+
+.interpretationCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl) !important;
+  height: 100%;
+}
+
+.interpretationTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600 !important;
+  margin-bottom: 1rem;
+}
+
+.interpretationTitle svg {
+  color: var(--color-primary);
+}
+
+.interpretation {
+  line-height: 1.8;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+.divider {
+  margin: 1.5rem 0 !important;
+}
+
+.recommendations {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-lg) !important;
+  padding: 1rem;
+}
+
+.recommendationList {
+  margin-left: 1.5rem;
+  margin-top: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+.recommendationList li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.modelInfo {
+  margin-top: 1.5rem;
+  border-radius: var(--radius-lg) !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container { padding: 1rem; padding-top: 5rem; }
+  .title { font-size: 1.75rem !important; }
+  .pageIcon { font-size: 2.5rem; }
+  .tabs { width: 100%; }
+  .tab { padding: 0.75rem 1rem !important; font-size: 0.875rem !important; }
+  .tabHeader { flex-direction: column; padding-right: 0; }
+  .tabActions { width: 100%; justify-content: center; padding: 1rem; border-top: 1px solid var(--color-border); }
+  .chartContainer { padding: 1rem; border-radius: var(--radius-xl) !important; }
+  .probabilityPercent { font-size: 2.5rem !important; }
+  .probabilityCircle { width: 140px !important; height: 140px !important; }
+}
+
+/* Dark mode fixes for Forecasts */
+[data-theme="dark"] .tabCard { background: var(--color-surface) !important; }
+[data-theme="dark"] .chartContainer { background: var(--color-bg) !important; border-color: var(--color-border) !important; }
+[data-theme="dark"] .insightCard { background: var(--color-surface) !important; border-color: var(--color-border) !important; }
+[data-theme="dark"] .inputCard { background: var(--color-bg) !important; border-color: var(--color-border) !important; }
+[data-theme="dark"] .input { background: var(--color-surface) !important; }
+[data-theme="dark"] .probabilityCard, [data-theme="dark"] .interpretationCard { background: var(--color-surface) !important; }
+[data-theme="dark"] .recommendations { background: var(--color-bg) !important; }
+[data-theme="dark"] .customTooltip { background: var(--color-surface) !important; border-color: var(--color-border) !important; }
+
+/* Tooltip info icon next to 'Confidence Interval' */
+.legendHelp { display: inline-flex; align-items: center; margin-left: 6px; color: var(--color-text-tertiary); cursor: help; transition: color 0.2s ease; }
+.legendHelp:hover, .legendHelp:focus { color: var(--color-primary); outline: none; }
+.legendHelpIcon { font-size: 16px !important; line-height: 1; vertical-align: middle; }
+
+/* Small mobile override ≤576px */
+@media (max-width: 576px) {
+  .container { padding: 0.75rem !important; padding-top: 5rem !important; }
+  
+  .headerContent {
+    align-items: flex-start;
+  }
+  
+  .pageIcon { font-size: 2.25rem !important; }
+  .title { font-size: 1.5rem !important; }
+  .subtitle { font-size: 0.9rem !important; }
+  .badges { gap: 0.5rem !important; }
+  .modelBadge { font-size: 0.75rem !important; padding: 0.3rem 0.6rem !important; }
+  .tabHeader { flex-direction: column; align-items: stretch; padding-right: 0; }
+  .tabActions { margin-top: 0.5rem; width: 100%; justify-content: space-around; gap: 0.25rem; padding: 0.5rem 0; }
+  .tab { font-size: 0.85rem !important; padding: 0.6rem 1rem !important; }
+  
+  .chartContainer {
+    height: auto !important;
+    padding: 0.75rem !important;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chartScrollWrapper {
+    overflow-y: hidden;
+    margin-bottom: 0.5rem;
+  }
+  .chartScrollWrapper::-webkit-scrollbar {
+    height: 6px;
+  }
+  .chartScrollWrapper::-webkit-scrollbar-thumb {
+    background-color: var(--color-border-hover);
+    border-radius: 3px;
+  }
+
+  .legendWrapperMobile {
+    width: 100%;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .legendGrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem 0.75rem;
+  }
+
+  .legendLabel { font-size: 0.75rem !important; }
+  
+  .insightCards { flex-direction: column; gap: 0.75rem !important; margin-bottom: 1.25rem !important; }
+  
+  .insightCard {
+    padding: 1rem !important;
+    gap: 1rem !important;
+    justify-content: center;
+  }
+
+  .insightIcon { font-size: 2rem !important; }
+  .insightValue { font-size: 1.5rem !important; }
+  .insightTitle { font-size: 0.85rem !important; }
+  .insightSubtitle { font-size: 0.75rem !important; }
+  .inputCard { padding: 0.75rem !important; }
+  .inputTitle { font-size: 1rem !important; margin-bottom: 1.25rem !important; }
+  .inputLabel { font-size: 0.8rem !important; }
+  .inputHelp { font-size: 0.7rem !important; }
+  .forecastButton { font-size: 0.85rem !important; padding: 0.6rem 1.25rem !important; width: 100%; }
+  .regionalResult { padding: 0.75rem !important; }
+  .probabilityCircle { width: 130px !important; height: 130px !important; }
+  .probabilityPercent { font-size: 1.8rem !important; }
+  .riskChip { font-size: 0.75rem !important; padding: 0.3rem 0.6rem !important; }
+  .recommendationList li { font-size: 0.75rem !important; }
+  .modelInfo { font-size: 0.8rem !important; }
+  .warningAlert { font-size: 0.8rem !important; }
+  .customTooltip { font-size: 0.8rem !important; padding: 0.5rem 0.75rem !important; }
+
+  /* New rules to override sx props */
+  .sectionDescription { font-size: 0.8rem !important; }
+  .probabilityLabel { font-size: 0.75rem !important; }
+  .interpretationTitle { font-size: 0.85rem !important; }
+  .interpretation { font-size: 0.75rem !important; }
+  .recommendations > :global(.MuiTypography-subtitle2) { font-size: 0.8rem !important; }
+  .alert :global(.MuiAlert-message) { font-size: 0.75rem !important; }
+}
+}

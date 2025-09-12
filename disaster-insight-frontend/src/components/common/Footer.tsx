@@ -16,7 +16,6 @@ import { api } from '../../api/client';
 import logoIconLight from '../../assets/logos/logo-icon.svg';
 import logoIconDark from '../../assets/logos/logo-icon-white.svg';
 
-
 // Define the interface for the footer link objects
 interface FooterLink {
   label: string;
@@ -46,14 +45,15 @@ export default function Footer() {
   }, []);
 
   const quickLinks: FooterLink[] = [
-    { label: 'API Docs', href: '#' },
-    { label: 'Documentation', href: '#' },
-    { label: 'About', href: '#' },
-    { label: 'Contact', href: '#' },
+    { label: 'API Docs', href: 'https://github.com/zainafxal/DisasterInsight-AI/tree/main/disaster-insight-api' },
+    { label: 'Documentation', href: 'https://github.com/zainafxal/DisasterInsight-AI' },
+    { label: 'About', href: 'https://github.com/zainafxal' },
+    { label: 'Contact', href: 'https://www.linkedin.com/in/zainafxal/' },
   ];
 
   const onlineStatusColor = apiOnline === false ? '#EF4444' : '#10B981';
-  const onlineStatusLabel = apiOnline === null ? 'Checking...' : apiOnline === false ? 'API Offline' : 'System Online';
+  const onlineStatusLabel =
+    apiOnline === null ? 'Checking...' : apiOnline === false ? 'API Offline' : 'System Online';
 
   return (
     <footer className={styles.footer}>
@@ -97,9 +97,17 @@ export default function Footer() {
                   size="small"
                   className={styles.statusBadge}
                   sx={{
-                    backgroundColor: `rgba(${onlineStatusColor.slice(1).match(/.{2}/g)!.map(x => parseInt(x, 16)).join(',')}, 0.1) !important`,
+                    backgroundColor: `rgba(${onlineStatusColor
+                      .slice(1)
+                      .match(/.{2}/g)!
+                      .map((x) => parseInt(x, 16))
+                      .join(',')}, 0.1) !important`,
                     color: `${onlineStatusColor} !important`,
-                    border: `1px solid rgba(${onlineStatusColor.slice(1).match(/.{2}/g)!.map(x => parseInt(x, 16)).join(',')}, 0.2) !important`,
+                    border: `1px solid rgba(${onlineStatusColor
+                      .slice(1)
+                      .match(/.{2}/g)!
+                      .map((x) => parseInt(x, 16))
+                      .join(',')}, 0.2) !important`,
                     '& .MuiChip-icon': {
                       color: `${onlineStatusColor} !important`,
                     },
@@ -136,50 +144,50 @@ export default function Footer() {
               </Box>
 
               <Box className={styles.social}>
-              <a
-                href="https://github.com/zainafxal"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <IconButton className={styles.socialIcon}>
-                  <GitHub />
-                </IconButton>
-              </a>
+                <a
+                  href="https://github.com/zainafxal"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <IconButton className={styles.socialIcon}>
+                    <GitHub />
+                  </IconButton>
+                </a>
 
-              <a
-                href="https://www.linkedin.com/in/zainafxal/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <IconButton className={styles.socialIcon}>
-                  <LinkedIn />
-                </IconButton>
-              </a>
+                <a
+                  href="https://www.linkedin.com/in/zainafxal/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <IconButton className={styles.socialIcon}>
+                    <LinkedIn />
+                  </IconButton>
+                </a>
 
-              <a
-                href="https://instagram.com/zainafxal"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <IconButton className={styles.socialIcon}>
-                  <Instagram />
-                </IconButton>
-              </a>
+                <a
+                  href="https://instagram.com/zainafxal"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <IconButton className={styles.socialIcon}>
+                    <Instagram />
+                  </IconButton>
+                </a>
 
-              <a
-                href="mailto:connect.zainafzal@gmail.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <IconButton className={styles.socialIcon}>
-                  <Email />
-                </IconButton>
-              </a>
-            </Box>
-
+                <a
+                  href="mailto:connect.zainafzal@gmail.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <IconButton className={styles.socialIcon}>
+                    <Email />
+                  </IconButton>
+                </a>
+              </Box>
             </Box>
           </motion.div>
-          {/* Quick links section with correct alignment and styling */}
+
+          {/* Quick links section */}
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
             <Typography
               variant="subtitle2"
@@ -193,6 +201,8 @@ export default function Footer() {
                   key={link.label}
                   href={link.href}
                   underline="none"
+                  target="_blank"               // ✅ Open in new tab
+                  rel="noopener noreferrer"     // ✅ Security best practice
                   sx={{
                     position: 'relative',
                     fontSize: '1rem',

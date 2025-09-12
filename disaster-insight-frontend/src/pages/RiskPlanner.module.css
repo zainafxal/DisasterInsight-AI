@@ -590,3 +590,711 @@ color: var(--color-text-secondary) !important;
 [data-theme="dark"] .verticalStepper :global(.MuiStepContent-root) {
 border-left-color: var(--color-border) !important;
 }
+
+
+/* === Extra small mobile overrides (<= 576px) === */
+@media (max-width: 576px) {
+  .container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  padding-top: 6rem; /* Consistent top padding for all pages */
+  min-height: calc(100vh - 80px);
+}
+
+/* Header */
+.header {
+  margin-bottom: 2rem;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.pageIcon {
+  font-size: 3.5rem !important;
+  color: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 12px rgba(59, 130, 246, 0.3));
+}
+
+.title {
+  font-size: 2.5rem !important;
+  font-weight: 800 !important;
+  color: var(--color-text);
+  margin-bottom: 0.25rem;
+}
+
+.subtitle {
+  color: var(--color-text-secondary);
+  font-size: 1.125rem;
+}
+
+.badges {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.modelBadge {
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%) !important;
+  color: white !important;
+  font-weight: 600 !important;
+  padding: 0.5rem 1rem !important;
+}
+
+.dataBadge {
+  background: rgba(139, 92, 246, 0.1) !important;
+  color: var(--color-accent) !important;
+  border: 1px solid rgba(139, 92, 246, 0.3) !important;
+  font-weight: 600 !important;
+}
+
+/* Form Card */
+.formCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md) !important;
+  overflow: hidden;
+  position: relative;
+}
+
+.cardGradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+}
+
+.formHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.formTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700 !important;
+  color: var(--color-text);
+}
+
+.titleIcon {
+  color: var(--color-secondary);
+  font-size: 1.5rem;
+}
+
+.resetButton {
+  border-color: var(--color-border) !important;
+  color: var(--color-text-secondary) !important;
+  border-radius: var(--radius-md) !important;
+}
+
+.resetButton:hover {
+  border-color: var(--color-primary) !important;
+  color: var(--color-primary) !important;
+  background: rgba(249, 115, 22, 0.05) !important;
+}
+
+/* Stepper */
+.stepIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-lg) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-secondary) !important;
+  border: 2px solid var(--color-border) !important;
+  color: var(--color-text-secondary) !important;
+  transition: var(--transition-base) !important;
+  font-size: 1.5rem;
+}
+
+.activeStep {
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+  color: var(--color-primary) !important;
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.completedStep {
+  background: var(--color-success);
+  color: var(--color-primary) !important;
+  border-color: transparent;
+}
+
+.stepLabel {
+  font-weight: 600 !important;
+  color: var(--color-text);
+  margin-bottom: 0.25rem !important;
+}
+
+.stepDescription {
+  color: var(--color-text-secondary) !important;
+}
+
+.stepContent {
+  margin-top: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.input {
+  background: var(--color-bg-secondary) !important;
+  border-radius: var(--radius-lg) !important;
+}
+
+.input .MuiOutlinedInput-root {
+  transition: var(--transition-base);
+  border-radius: var(--radius-xl) !important;
+}
+
+.input .MuiOutlinedInput-root:hover {
+  background: var(--color-bg);
+}
+
+.sliderContainer {
+  padding: 0 0.5rem !important;
+}
+
+.sliderLabel {
+  color: var(--color-text-secondary);
+  font-weight: 500 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.slider {
+  color: var(--color-primary) !important;
+}
+
+.monthLabels {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0.5rem !important;
+  margin-top: 0.5rem !important;
+}
+
+.stepActions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.backButton {
+  color: var(--color-text-secondary) !important;
+}
+
+.nextButton,
+.submitButton {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%) !important;
+  color: white !important;
+  font-weight: 600 !important;
+  padding: 0.75rem 2rem !important;
+  box-shadow: 0 4px 14px 0 rgba(249, 115, 22, 0.25) !important;
+  border-radius: var(--radius-xl) !important;
+  transition: var(--transition-base) !important;
+}
+
+.nextButton:hover,
+.submitButton:hover {
+  box-shadow: 0 6px 20px 0 rgba(249, 115, 22, 0.35) !important;
+  transform: translateY(-2px);
+}
+
+.nextButton:disabled,
+.submitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Result */
+.result {
+  display: grid;
+  grid-template-columns: auto 1fr; /* meter | text */
+  column-gap: 3rem;                /* same as old .riskDisplay gap */
+  align-items: start;
+}
+
+.resultTitle {
+  font-weight: 700 !important;
+  color: var(--color-text);
+  text-align: center;
+  grid-column: 2;
+  text-align: left !important; /* override center from earlier */
+  margin-bottom: 0.75rem;      /* small spacing above content */
+}
+
+.riskDisplay {
+  display: contents !important; /* replaces its own grid */
+  grid-template-columns: auto 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.riskMeter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.riskCircle {
+  position: relative;
+  display: inline-flex;
+}
+
+.riskProgress {
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+}
+
+.riskValue {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.riskPercent {
+  font-size: 3rem !important;
+  font-weight: 800 !important;
+  color: var(--color-text);
+  line-height: 1 !important;
+}
+
+.riskLabel {
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+
+.riskChip {
+  font-weight: 700 !important;
+  font-size: 0.875rem !important;
+  padding: 0.75rem 1.5rem !important;
+  height: auto !important;
+}
+
+.riskInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.riskAlert {
+  border-radius: var(--radius-lg) !important;
+}
+
+.factors {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-xl) !important;
+  padding: 1.5rem;
+  border: 1px solid var(--color-border);
+}
+
+.factorsTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600 !important;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+.factorsTitle svg {
+  color: var(--color-primary);
+}
+
+.factor {
+  margin-bottom: 1rem;
+}
+
+.factor:last-child {
+  margin-bottom: 0;
+}
+
+.factorHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.factorName {
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.factorWeight {
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+
+.factorBar {
+  height: 8px !important;
+  border-radius: var(--radius-full);
+  background: var(--color-bg) !important;
+}
+
+/* Info Card */
+.infoCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl) !important;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.infoGradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 186px;
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+  opacity: 0.1;
+}
+
+.infoTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700 !important;
+  margin-bottom: 1rem !important;
+  position: relative;
+}
+
+.infoAlert {
+  border-radius: var(--radius-lg) !important;
+  margin-bottom: 1rem;
+}
+
+.divider {
+  margin: 1.5rem 0 !important;
+}
+
+.featuresTitle {
+  font-weight: 600 !important;
+  color: var(--color-text);
+  margin-bottom: 0.75rem !important;
+}
+
+.featureList {
+  padding: 0 !important;
+  margin-bottom: 1rem !important;
+}
+
+.featureItem {
+  padding: 0.25rem 0 !important;
+}
+
+.checkIcon {
+  color: var(--color-success);
+  font-size: 1.25rem;
+}
+
+.warningAlert {
+  border-radius: var(--radius-lg) !important;
+  border: 1px solid rgba(245, 158, 11, 0.3) !important;
+}
+
+/* Tips Card */
+.tipsCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl) !important;
+}
+
+.tipsTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700 !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.tipsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem !important;
+  background: var(--color-bg-secondary) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius-md) !important;
+  transition: var(--transition-base);
+}
+
+.tip:hover {
+  transform: translateX(4px);
+  box-shadow: var(--shadow-sm);
+}
+
+.tipEmoji {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.tipTitle {
+  font-weight: 600 !important;
+  color: var(--color-text);
+  margin-bottom: 0.25rem;
+}
+
+.tipText {
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .riskDisplay {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+   .result {
+    grid-template-columns: 1fr;  /* stack everything */
+    row-gap: 1.25rem;
+  }
+
+  .resultTitle {
+    grid-column: 1;
+    text-align: left; /* or center if you prefer */
+  }
+
+  .riskMeter {
+    margin: 0 auto; /* keep the circle centered on narrow screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+    padding-top: 5rem;
+  }
+  
+  .title {
+    font-size: 1.75rem !important;
+  }
+  
+  .pageIcon {
+    font-size: 2.5rem;
+  }
+  
+  .stepActions {
+    flex-direction: column;
+  }
+  
+  .backButton,
+  .nextButton,
+  .submitButton {
+    width: 100%;
+  }
+  
+  .riskPercent {
+    font-size: 2rem !important;
+  }
+  
+  .riskCircle svg {
+    width: 120px !important;
+    height: 120px !important;
+  }
+}
+
+
+/* Dark mode fixes for RiskPlanner */
+[data-theme="dark"] .formCard,
+[data-theme="dark"] .infoCard,
+[data-theme="dark"] .tipsCard {
+  background: var(--color-surface) !important;
+}
+
+[data-theme="dark"] .input {
+  background: var(--color-bg) !important;
+}
+
+[data-theme="dark"] .input .MuiOutlinedInput-root {
+  background: var(--color-bg) !important;
+  color: var(--color-text) !important;
+}
+
+[data-theme="dark"] .stepIcon:not(.activeStep):not(.completedStep) {
+background: var(--color-surface) !important;
+border-color: var(--color-border) !important;
+color: var(--color-text-secondary) !important;
+}
+
+[data-theme="dark"] .factors {
+  background: var(--color-bg) !important;
+  border-color: var(--color-border) !important;
+}
+
+[data-theme="dark"] .tip {
+  background: var(--color-bg) !important;
+  border-color: var(--color-border) !important;
+}
+
+
+/* === Icon Colors for Light and Dark Modes === */
+.boltIcon {
+  color: #fffffff1 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .boltIcon {
+    color: #fffffff1 !important;
+  }
+}
+
+.globeIcon {
+  color: #4caf50;
+}
+
+@media (prefers-color-scheme: dark) {
+  .globeIcon {
+    color: #81c784;
+  }
+}
+
+.verticalStepper :global(.MuiStepContent-root) {
+  margin-left: 24px !important; /* half of .stepIcon (48px) */
+  border-left: 1px solid var(--color-border) !important;
+}
+
+[data-theme="dark"] .verticalStepper :global(.MuiStepContent-root) {
+border-left-color: var(--color-border) !important;
+}
+
+
+/* === Extra small mobile overrides (<= 576px) === */
+@media (max-width: 576px) {
+  .container {
+    padding: 0.75rem !important;
+    padding-top: 5rem !important;
+  }
+
+  .headerContent {
+    align-items: flex-start;
+  }
+
+  .title {
+    font-size: 1.5rem !important;
+  }
+
+  .subtitle {
+    font-size: 0.9rem !important;
+  }
+
+  .pageIcon {
+    font-size: 2.25rem !important;
+  }
+
+  .badges {
+    gap: 0.5rem !important;
+  }
+
+  .modelBadge,
+  .dataBadge {
+    font-size: 0.75rem !important;
+    padding: 0.3rem 0.6rem !important;
+  }
+
+  .riskPercent {
+    font-size: 1.4rem !important;
+  }
+
+  .riskCircle svg {
+    width: 90px !important;
+    height: 90px !important;
+  }
+
+  .riskChip {
+    font-size: 0.75rem !important;
+    padding: 0.4rem 0.8rem !important;
+  }
+
+  .riskInfo {
+    gap: 1rem !important;
+  }
+
+  .factors {
+    padding: 1rem !important;
+  }
+
+  .factorBar {
+    height: 6px !important;
+  }
+
+  .stepIcon {
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 1.2rem !important;
+  }
+
+  .stepLabel {
+    font-size: 0.9rem !important;
+  }
+
+  .stepDescription {
+    font-size: 0.75rem !important;
+  }
+
+  .stepActions {
+    flex-direction: column;
+    gap: 0.75rem !important;
+  }
+
+  .backButton,
+  .nextButton,
+  .submitButton {
+    width: 100%;
+    padding: 0.6rem 1.25rem !important;
+    font-size: 0.9rem !important;
+  }
+  
+  .verticalStepper :global(.MuiStepContent-root) {
+    margin-left: 20px !important; /* Half of the 40px mobile icon width */
+  }
+
+  .infoGradient {
+    height: 169px;
+  }
+}
+
+
+@media (max-width: 576px) {
+  .riskAlert {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    padding: 0.75rem !important;
+    font-size: 0.8rem !important;
+  }
+
+  .riskAlert > svg,
+  .riskAlert svg {
+    font-size: 1.5rem !important;
+    margin-top: 0 !important;
+    flex-shrink: 0;
+    vertical-align: middle;
+  }
+}
+}

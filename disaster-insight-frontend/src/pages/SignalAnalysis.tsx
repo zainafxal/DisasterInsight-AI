@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Box,
+  useMediaQuery,
   Typography,
   Card,
   CardContent,
@@ -116,6 +117,7 @@ const categoryInfo: Record<string, { color: string; icon: string; description: s
 };
 
 export default function SignalAnalysis() {
+  const isSmallMobile = useMediaQuery('(max-width: 576px)');
   const [text, setText] = useState('');
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<ClassificationResult | null>(null);
@@ -270,7 +272,11 @@ export default function SignalAnalysis() {
                     exit={{ opacity: 0, scale: 0.9, y: 20 }}
                     className={styles.result}
                   >
-                    <Typography variant="h6" className={styles.resultTitle}>
+                    <Typography
+                      variant={isSmallMobile ? 'h5' : 'h6'}
+                      className={styles.resultTitle}
+                      style={{ textAlign: isSmallMobile ? 'center' : 'left' }} // <-- CENTER for small mobile
+                    >
                       Classification Result
                     </Typography>
                     

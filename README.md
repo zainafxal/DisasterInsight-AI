@@ -59,7 +59,27 @@ This platform integrates four distinct AI models and a live data feed into a sin
 *   **📡 Live Global Monitoring:** An integrated, real-time feed from the USGS API displays significant earthquake events as they happen around the globe.
 *   **🖥️ Professional Dashboard:** A polished, branded, and fully responsive **React** frontend with an intuitive dark mode and modern, interactive visualizations.
 
+
 ---
+
+## 📑 Reports & Documentation
+
+This repository includes comprehensive documentation for both end-users and developers.
+
+*   **Project Summary Report:** A high-level overview of the project's objectives, methodology, and key results.
+    > ➡️ **[Read the Full Project Report](./reports/PROJECT_SUMMARY_REPORT.md)**
+
+*   **Model Performance Reports:** In-depth analysis of each of the four AI models, including metrics, confusion matrices, and feature importance.
+    > ➡️ **[View Model Performance Reports](./reports/model_performance/)**
+
+*   **Exploratory Data Analysis (EDA):** Reports on the initial data analysis that informed our modeling strategies.
+    > ➡️ **[View EDA Reports](./reports/eda/)**
+
+*   **Dashboard User Guide:** A detailed walkthrough of all features in the live web application.
+    > ➡️ **[Read the User Guide](./disaster-insight-frontend/docs/USER_GUIDE.md)**
+
+---
+
 
 ## 🛠️ Tech Stack & Architecture
 
@@ -94,6 +114,7 @@ This monorepo contains all the code and assets for the DisasterInsight AI platfo
 | legacy_streamlit_ui       | The initial proof-of-concept dashboard built with Streamlit. Kept for historical/development reference. |
 | models                    | The central "model registry" containing the final, serialized model files ready for deployment. |
 | notebooks                 | The Jupyter Notebooks detailing the R&D, training, and evaluation of all four AI models.        |
+|reports	                  | (Start Here) Comprehensive project, model performance, and EDA reports.                         |
 | visuals                   | A repository of charts and plots generated during the data analysis and model evaluation phases. |
 
 ---

@@ -55,6 +55,13 @@ The application is powered by a separate backend API, also deployed on Hugging F
   <img src="./src/assets/dashboard-preview.jpg" alt="DisasterInsight AI Dashboard Preview" width="800"/>
 </p>
 
+---
+
+## 📖 Documentation
+
+For a detailed walkthrough of all dashboard features and best practices for using the platform, please see our comprehensive guide.
+
+> ➡️ **[View the Dashboard User Guide](./docs/USER_GUIDE.md)**
 
 ---
 

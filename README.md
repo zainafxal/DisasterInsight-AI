@@ -1,6 +1,6 @@
 <p align="center">
   <img src="./disaster-insight-frontend/src/assets/logos/logo-light.svg#gh-light-mode-only" alt="DisasterInsight AI Logo" width="180">
-  <img src="./disaster-insight-frontend/assets/logos/logo-dark.svg#gh-dark-mode-only" alt="DisasterInsight AI Logo" width="180">
+  <img src="./disaster-insight-frontend/src/assets/logos/logo-dark.svg#gh-dark-mode-only" alt="DisasterInsight AI Logo" width="180">
 </p>
 
 

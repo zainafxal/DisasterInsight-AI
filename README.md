@@ -1,9 +1,8 @@
 <p align="center">
-  <picture>
-    <source srcset="./disaster-insight-frontend/assets/logos/logo-dark.svg" media="(prefers-color-scheme: dark)">
-    <img src="./disaster-insight-frontend/src/assets/logos/logo-light.svg" alt="DisasterInsight AI Logo" width="180">
-  </picture>
+  <img src="./disaster-insight-frontend/src/assets/logos/logo-light.svg#gh-light-mode-only" alt="DisasterInsight AI Logo" width="180">
+  <img src="./disaster-insight-frontend/assets/logos/logo-dark.svg#gh-dark-mode-only" alt="DisasterInsight AI Logo" width="180">
 </p>
+
 
 <h1 align="center">DisasterInsight AI Platform</h1>
 

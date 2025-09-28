@@ -1,6 +1,6 @@
 <p align="center">
   <picture>
-    <source srcset="./disaster-insight-frontend/assets/logo-dark-BUBvcq5w.svg" media="(prefers-color-scheme: dark)">
+    <source srcset="./disaster-insight-frontend/assets/logos/logo-dark.svg" media="(prefers-color-scheme: dark)">
     <img src="./disaster-insight-frontend/src/assets/logos/logo-light.svg" alt="DisasterInsight AI Logo" width="180">
   </picture>
 </p>

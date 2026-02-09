@@ -8,29 +8,8 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Framework-FastAPI-green?style=for-the-badge&logo=fastapi" alt="FastAPI Badge"/>
-  <a href="https://huggingface.co/spaces/zainafxal/disaster-insight-api"><img src="https://img.shields.io/badge/Deployment-Hugging_Face-yellow?style=for-the-badge&logo=huggingface" alt="Hugging Face Deployment"/></a>
   <img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=for-the-badge" alt="License Badge"/>
 </p>
-
----
-
-## 🚀 Live API Endpoints
-
-This API is deployed and live on **Hugging Face Spaces**.
-
-*   **Swagger UI (Interactive Docs):**  
-    [**https://zainafxal-disaster-insight-api.hf.space/docs**](https://zainafxal-disaster-insight-api.hf.space/docs)
-
-*   **Health Check Endpoint:**  
-    [**https://zainafxal-disaster-insight-api.hf.space/health**](https://zainafxal-disaster-insight-api.hf.space/health)
-
----
-
-## 🖥️ Frontend Application
-
-This API serves as the backend for the official DisasterInsight AI web application, which is also live.
-
-> **Visit the Live Web App:** [**https://huggingface.co/spaces/zainafxal/disaster-insight-webapp**](https://huggingface.co/spaces/zainafxal/disaster-insight-webapp)
 
 ---
 
@@ -48,7 +27,7 @@ Follow these instructions to get the API server up and running on your local mac
 First, clone the entire project repository (if you haven't already) and navigate into this API directory.
 
 ```bash
-git clone https://github.com/your-username/DisasterInsight-AI.git
+git clone https://github.com/zainafxal/DisasterInsight-AI.git
 cd DisasterInsight-AI/disaster-insight-api
 ```
 
@@ -64,6 +43,10 @@ Create and activate the Conda environment from the provided YAML file. This will
 # Create the environment
 conda env create -f environment.yml
 
+# Create Environment File
+cp .env.example .env
+# Open .env and add your GOOGLE_API_KEY
+
 # Activate the environment
 conda activate disaster-insight-api-env
 ```
@@ -75,6 +58,10 @@ If you prefer not to use Conda, you can use venv and pip.
 ```bash
 # Create a virtual environment
 python -m venv venv
+
+# Create Environment File
+cp .env.example .env
+# Open .env and add your GOOGLE_API_KEY
 
 # Activate it
 # On macOS/Linux:
@@ -105,14 +92,28 @@ The API will now be running locally.
 
 ---
 
+The core inference engine powering the platform. This FastAPI service orchestrates **5 AI Models** and handles the **Agentic RAG** workflow.
+
+## 🚀 Key Capabilities
+
+This is not just a CRUD API. It is a complex **AI Orchestration Layer** capable of:
+
+*   **🤖 Agentic Workflow:** Integrates **Google Gemini 2.0** with custom tools (Risk Models, Forecasting, Knowledge Base) to answer complex queries.
+*   **👁️ Computer Vision:** Runs high-performance **ONNX inference** to classify disaster imagery and assign triage priority.
+*   **📚 RAG Pipeline:** Automatically ingests safety protocols (PDFs) into **ChromaDB** on startup for context-aware answers.
+*   **⚡ Optimization:** Uses LRU Caching for models and Async endpoints for high concurrency.
+
+---
+
 ## 📦 Models Served
 
-This API provides access to four pre-trained models:
+This API serves five distinct, pre-trained models:
 
-1.  **Tweet Classifier (M1):** Classifies disaster-related tweets into humanitarian categories. *(Built with Transformers)*
-2.  **Static Risk Predictor (M2):** Assesses disaster event risk based on historical features. *(Built with Scikit-learn / XGBoost)*
-3.  **Earthquake Frequency Forecaster (M3):** Provides long-term global earthquake frequency forecasts. *(Built with Prophet)*
-4.  **Regional Impact Forecaster (M4):** Predicts short-term impact probability for specific regions. *(Built with XGBoost)*
+1.  **Tweet Classifier (M1):** Classifies text into 10 humanitarian categories. **(Transformers/DistilBERT)**
+2.  **Static Risk Predictor (M2):** Assesses event risk based on historical features. **(XGBoost)**
+3.  **Earthquake Forecaster (M3):** Long-term global frequency forecasting. **(Prophet)**
+4.  **Regional Impact Model (M4):** Short-term high-impact probability for specific zones. **(XGBoost)**
+5.  **Visual Damage Assessor (M5):** Classifies disaster images (Fire/Flood/Damage) for triage. **(MobileNetV2 via ONNX)**
 
 ---
 
@@ -122,6 +123,12 @@ This API provides access to four pre-trained models:
 *   `POST /api/v1/predict-risk`: Predicts the static risk of a disaster event.
 *   `GET  /api/v1/global-earthquake-forecast`: Retrieves the global earthquake frequency forecast.
 *   `POST /api/v1/predict-regional-impact`: Forecasts next-quarter impact probability for specific high-risk regions.
+*   `POST /api/v1/analyze-damage`: Computer Vision image analysis.
+
+**Agent & RAG :**
+
+*   `POST /api/v1/chat/ask`: Send message to the Multimodal Agent.
+*   `POST /api/v1/chat/ingest-docs`: Trigger manual PDF ingestion into Vector DB.
 
 *Full request and response schemas are available in the Swagger UI.*
 
@@ -130,8 +137,9 @@ This API provides access to four pre-trained models:
 ## 🛠 Tech Stack
 
 *   **Framework:** FastAPI, Uvicorn
-*   **ML Libraries:** Transformers, PyTorch, Scikit-learn, XGBoost, Prophet
-*   **Deployment:** Hugging Face Spaces (via Docker)
+*   **GenAI & RAG:** Google Generative AI SDK, LangChain concepts, ChromaDB
+*   **ML Libraries:** PyTorch, Scikit-learn, XGBoost, Prophet, ONNX Runtime
+*   **Utilities:** Pydantic, Python-Multipart
 
 ---
 

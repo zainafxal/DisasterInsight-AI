@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   IconButton, 
@@ -24,6 +24,7 @@ import {
   NotificationsRounded,
   SettingsRounded,
   MenuRounded, 
+  CameraAltRounded // 👈 New Icon for CV
 } from '@mui/icons-material';
 import { useTheme } from '../../hooks/useTheme';
 import logoLight from '../../assets/logos/logo-light.svg';
@@ -32,7 +33,6 @@ import logoIconLight from '../../assets/logos/logo-icon.svg';
 import logoIconDark from '../../assets/logos/logo-icon-white.svg';
 import styles from './Header.module.css';
 
-// Define the interface for the earthquake data to resolve TypeScript errors
 interface EarthquakeFeature {
   id: string;
   properties: {
@@ -77,6 +77,7 @@ const navItems = [
 
 export default function Header() {
   const { theme, toggleTheme } = useTheme();
+  const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
@@ -84,19 +85,15 @@ export default function Header() {
   const isSmallMobile = useMediaQuery('(max-width: 576px)');
   const isTablet = useMediaQuery('(max-width: 1024px)');
   
-  // State for Notifications Popover
   const [notificationsAnchorEl, setNotificationsAnchorEl] = useState<null | HTMLElement>(null);
   const [earthquakeData, setEarthquakeData] = useState<EarthquakeFeature[]>([]);
   const [loadingEarthquakes, setLoadingEarthquakes] = useState(true);
-
-  // State for Settings Menu
   const [settingsAnchorEl, setSettingsAnchorEl] = useState<null | HTMLElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -118,32 +115,117 @@ export default function Header() {
       }
       setLoadingEarthquakes(false);
     };
-
     fetchEarthquakes();
   }, []);
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
+  const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
   
   const handleNotificationsClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setNotificationsAnchorEl(event.currentTarget);
   };
-
-  const handleNotificationsClose = () => {
-    setNotificationsAnchorEl(null);
-  };
+  const handleNotificationsClose = () => setNotificationsAnchorEl(null);
   
   const handleSettingsClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setSettingsAnchorEl(event.currentTarget);
   };
-  
-  const handleSettingsClose = () => {
-    setSettingsAnchorEl(null);
-  };
+  const handleSettingsClose = () => setSettingsAnchorEl(null);
   
   const openNotifications = Boolean(notificationsAnchorEl);
   const openSettings = Boolean(settingsAnchorEl);
+
+  // --- NEW: The Animated AI Vision Button Component ---
+  const VisionButton: React.FC = () => {
+  const [showAi, setShowAi] = useState(false);
+
+  useEffect(() => {
+    let showAiTimeout: number;
+    let hideAiTimeout: number;
+
+    const scheduleCycle = () => {
+      // After 4s of camera, show AI
+      showAiTimeout = window.setTimeout(() => {
+        setShowAi(true);
+        // Show AI for 2s, then go back to camera
+        hideAiTimeout = window.setTimeout(() => {
+          setShowAi(false);
+        }, 2000);
+      }, 4000);
+    };
+
+    // Start first cycle
+    scheduleCycle();
+    // Repeat every 6s (4s camera + 2s AI)
+    const intervalId = window.setInterval(scheduleCycle, 6000);
+
+    return () => {
+      clearTimeout(showAiTimeout);
+      clearTimeout(hideAiTimeout);
+      clearInterval(intervalId);
+    };
+  }, []);
+
+  return (
+    <Tooltip title="AI Damage Assessment">
+      <IconButton 
+        className={`${styles.actionBtn} ${styles.visionBtn}`} 
+        onClick={() => navigate('/damage-assessment')}
+        sx={{
+          padding: isSmallMobile ? '4px' : '8px',
+          color: 'var(--color-primary)',
+          position: 'relative',
+          overflow: 'visible'
+        }}
+      >
+        {/* Pulsing halo */}
+        <motion.div
+          animate={{ 
+            boxShadow: [
+              "0 0 0 0px rgba(249, 115, 22, 0.2)",
+              "0 0 0 4px rgba(249, 115, 22, 0)",
+            ]
+          }}
+          transition={{ 
+            duration: 2, 
+            repeat: Infinity, 
+            ease: "easeInOut" 
+          }}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            borderRadius: '50%',
+          }}
+        />
+
+        {/* Icon ↔ AI text flip */}
+        <AnimatePresence mode="wait">
+          {showAi ? (
+            <motion.span
+              key="ai"
+              className={styles.visionContent}
+              initial={{ opacity: 0, rotateY: -90, scale: 0.8 }}
+              animate={{ opacity: 1, rotateY: 0, scale: 1 }}
+              exit={{ opacity: 0, rotateY: 90, scale: 0.8 }}
+              transition={{ duration: 0.35, ease: "easeInOut" }}
+            >
+              <span className={styles.visionAiText}>AI</span>
+            </motion.span>
+          ) : (
+            <motion.span
+              key="camera"
+              className={styles.visionContent}
+              initial={{ opacity: 0, rotateY: 90, scale: 0.8 }}
+              animate={{ opacity: 1, rotateY: 0, scale: 1 }}
+              exit={{ opacity: 0, rotateY: -90, scale: 0.8 }}
+              transition={{ duration: 0.35, ease: "easeInOut" }}
+            >
+              <CameraAltRounded sx={{ fontSize: isSmallMobile ? '20px' : '24px' }} />
+            </motion.span>
+          )}
+        </AnimatePresence>
+      </IconButton>
+    </Tooltip>
+  );
+};
 
   return (
     <>
@@ -212,10 +294,11 @@ export default function Header() {
               </nav>
             )}
 
-
           <div className={styles.actions}>
-          <>
-            {/* Notifications (always shown) */}
+            {/* 1. NEW: Vision AI Button (Placed LEFT of notifications) */}
+            <VisionButton />
+
+            {/* 2. Notifications */}
             <Tooltip title="Notifications">
               <IconButton 
                 className={styles.actionBtn} 
@@ -242,19 +325,12 @@ export default function Header() {
               </IconButton>
             </Tooltip>
 
-            {/* Notifications popover (unchanged) */}
             <Popover
               open={openNotifications}
               anchorEl={notificationsAnchorEl}
               onClose={handleNotificationsClose}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'right',
-              }}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+              transformOrigin={{ vertical: 'top', horizontal: 'right' }}
             >
               <div style={{ padding: '16px', maxWidth: '300px' }}>
                 <h3 style={{ margin: '0 0 8px', fontSize: '1.1rem' }}>Active Alerts</h3>
@@ -276,7 +352,7 @@ export default function Header() {
               </div>
             </Popover>
 
-            {/* Settings */}
+            {/* 3. Settings */}
             <Tooltip title="Settings">
               <IconButton className={styles.actionBtn} onClick={handleSettingsClick}>
                 <SettingsRounded />
@@ -296,56 +372,44 @@ export default function Header() {
             </Menu>
 
             <div className={styles.divider} />
-          </>
 
-          {/* Theme toggle: only show in header when NOT small mobile */}
-          {!isSmallMobile && (
-            <Tooltip title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}>
-              <IconButton 
-                onClick={toggleTheme} 
-                className={styles.themeToggle}
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  '& > div': {
+            {/* 4. Theme Toggle */}
+            {!isSmallMobile && (
+              <Tooltip title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}>
+                <IconButton 
+                  onClick={toggleTheme} 
+                  className={styles.themeToggle}
+                  sx={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                  }
-                }}
-              >
-                <motion.div
-                  key={theme}
-                  initial={{ rotate: -180, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '100%',
-                    height: '100%'
+                    '& > div': { display: 'flex', alignItems: 'center', justifyContent: 'center' }
                   }}
                 >
-                  {theme === 'dark' ? <LightModeRounded /> : <DarkModeRounded />}
-                </motion.div>
+                  <motion.div
+                    key={theme}
+                    initial={{ rotate: -180, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                    style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                  >
+                    {theme === 'dark' ? <LightModeRounded /> : <DarkModeRounded />}
+                  </motion.div>
+                </IconButton>
+              </Tooltip>
+            )}
+
+            {/* 5. Drawer Toggle */}
+            {(isMobile || isSmallMobile) && (
+              <IconButton 
+                className={styles.menuBtn} 
+                onClick={handleDrawerToggle}
+                aria-label="Open navigation"
+              >
+                <MenuRounded sx={{ fontSize: isSmallMobile ? '22px' : '26px' }} />
               </IconButton>
-            </Tooltip>
-          )}
-
-          {/* Drawer toggle (hamburger) — visible on mobile & small mobile */}
-          {(isMobile || isSmallMobile) && (
-            <IconButton 
-              className={styles.menuBtn} 
-              onClick={handleDrawerToggle}
-              aria-label="Open navigation"
-            >
-              <MenuRounded sx={{ fontSize: isSmallMobile ? '22px' : '26px' }} />
-            </IconButton>
-          )}
-        </div>
-
+            )}
+          </div>
         </div>
       </motion.header>
 
@@ -357,7 +421,7 @@ export default function Header() {
           sx: {
             backgroundColor: 'var(--color-surface)',
             color: 'var(--color-text)',
-            width: isSmallMobile ? 240 : 320, // narrower on tiny phones
+            width: isSmallMobile ? 240 : 320,
             borderLeft: '1px solid var(--color-border)',
           }
         }}
@@ -365,32 +429,12 @@ export default function Header() {
         <div className={styles.drawerHeader}>
           {isSmallMobile ? (
             <Tooltip title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}>
-              <IconButton 
-                onClick={toggleTheme} 
-                className={styles.themeToggle}
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  '& > div': {
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }
-                }}
-              >
+              <IconButton onClick={toggleTheme} className={styles.themeToggle}>
                 <motion.div
                   key={theme}
                   initial={{ rotate: -180, opacity: 0 }}
                   animate={{ rotate: 0, opacity: 1 }}
                   transition={{ duration: 0.3 }}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '100%',
-                    height: '100%'
-                  }}
                 >
                   {theme === 'dark' ? <LightModeRounded /> : <DarkModeRounded />}
                 </motion.div>
@@ -403,11 +447,7 @@ export default function Header() {
               className={styles.drawerLogo}
             />
           )}
-
-          <IconButton 
-            onClick={handleDrawerToggle}
-            className={styles.closeBtn}
-          >
+          <IconButton onClick={handleDrawerToggle} className={styles.closeBtn}>
             <CloseIcon />
           </IconButton>
         </div>
@@ -416,59 +456,38 @@ export default function Header() {
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = location.pathname === item.path;
-
             return (
               <Link
                 key={item.path}
                 to={item.path}
-                onClick={handleDrawerToggle}  // 👈 closes drawer after navigation
+                onClick={handleDrawerToggle}
                 className={`${styles.navLink} ${isActive ? styles.active : ''}`}
-                style={{
-                  padding: isSmallMobile 
-                    ? '12px 14px'   // more padding for touch
-                    : isMobile 
-                      ? '12px 16px'
-                      : undefined
-                }}
+                style={{ padding: isSmallMobile ? '12px 14px' : isMobile ? '12px 16px' : undefined }}
               >
-                <Icon 
-                  className={styles.navIcon} 
-                  style={{
-                    fontSize: isSmallMobile 
-                      ? '28px'   // bigger icons
-                      : isMobile 
-                        ? '24px'
-                        : '22px'
-                  }}
-                />
-                <span 
-                  className={styles.navLabel}
-                  style={{
-                    fontSize: isSmallMobile ? '1rem' : '0.9rem', // bigger text
-                    fontWeight: isSmallMobile ? 600 : 500
-                  }}
-                >
+                <Icon className={styles.navIcon} style={{ fontSize: isSmallMobile ? '28px' : isMobile ? '24px' : '22px' }} />
+                <span className={styles.navLabel} style={{ fontSize: isSmallMobile ? '1rem' : '0.9rem', fontWeight: isSmallMobile ? 600 : 500 }}>
                   {item.label}
                 </span>
                 {isActive && (
-                  <motion.div
-                    className={styles.activeIndicator}
-                    layoutId="activeNav"
-                    initial={false}
-                    transition={{ 
-                      type: "spring", 
-                      stiffness: 500, 
-                      damping: 30,
-                      mass: 1
-                    }}
-                  />
+                  <motion.div className={styles.activeIndicator} layoutId="activeNav" initial={false} />
                 )}
               </Link>
             );
           })}
+          {/* Also add the Vision Link in the Drawer for explicit access */}
+          <Link
+            to="/damage-assessment"
+            onClick={handleDrawerToggle}
+            className={`${styles.navLink} ${location.pathname === '/damage-assessment' ? styles.active : ''}`}
+            style={{ padding: isSmallMobile ? '12px 14px' : isMobile ? '12px 16px' : undefined }}
+          >
+            <CameraAltRounded className={styles.navIcon} style={{ fontSize: isSmallMobile ? '28px' : '22px' }} />
+            <span className={styles.navLabel} style={{ fontSize: isSmallMobile ? '1rem' : '0.9rem', fontWeight: isSmallMobile ? 600 : 500 }}>
+              Damage Assessment
+            </span>
+          </Link>
         </List>
       </Drawer>
-
     </>
   );
 }

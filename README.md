@@ -1,63 +1,126 @@
 <p align="center">
-  <img src="./disaster-insight-frontend/src/assets/logos/logo-light.svg#gh-light-mode-only" alt="DisasterInsight AI Logo" width="180">
-  <img src="./disaster-insight-frontend/src/assets/logos/logo-dark.svg#gh-dark-mode-only" alt="DisasterInsight AI Logo" width="180">
+  <picture>
+    <source srcset="./disaster-insight-frontend/src/assets/logos/logo-dark.svg" media="(prefers-color-scheme: dark)">
+    <img src="./disaster-insight-frontend/src/assets/logos/logo-light.svg" alt="DisasterInsight AI Logo" width="180">
+  </picture>
 </p>
-
 
 <h1 align="center">DisasterInsight AI Platform</h1>
 
 <p align="center">
-  <strong>From Raw Data to Real-Time Actionable Intelligence.</strong>
+  <strong>Multimodal AI System for Real-Time Disaster Analytics & Response.</strong>
   <br />
-  An end-to-end, full-stack disaster analytics platform that leverages AI to detect, analyze, and forecast global disaster events.
+  Combines NLP, Computer Vision, Agentic RAG, and Predictive Modeling to transform chaotic data into actionable intelligence.
 </p>
 
 <p align="center">
-  <a href="https://huggingface.co/spaces/zainafxal/disaster-insight-webapp" target="_blank">
-    <img src="https://img.shields.io/badge/Live-WebApp-blue?style=for-the-badge&logo=react" alt="Live WebApp"/>
-  </a>
-  <a href="https://zainafxal-disaster-insight-api.hf.space/docs" target="_blank">
-    <img src="https://img.shields.io/badge/Live-API-green?style=for-the-badge&logo=fastapi" alt="Live API"/>
-  </a>
-</p>
-
-<p align="center">
-  <a href="#-overview">Overview</a> •
-  <a href="#-key-features">Key Features</a> •
-  <a href="#-tech-stack--architecture">Architecture</a> •
-  <a href="#-repository-navigation">Repository Navigation</a> •
-  <a href="#-setup--installation">Setup</a> •
-  <a href="#-datasets--credits">Datasets</a> •
-  <a href="#-license">License</a>
-</p>
-
-<p align="center">
-  <a href="https://huggingface.co/spaces/zainafxal/disaster-insight-webapp">
-    <img src="./disaster-insight-frontend/src/assets/dashboard-preview.jpg" alt="DisasterInsight AI Dashboard Preview" width="800"/>
-  </a>
+  <img src="https://img.shields.io/badge/Tech-FastAPI%20%7C%20React%20%7C%20Python-blue?style=flat-square"/>
+  <img src="https://img.shields.io/badge/AI-Gemini%20Agent%20%7C%20RAG-purple?style=flat-square"/>
+  <img src="https://img.shields.io/badge/Models-XGBoost%20%7C%20Prophet%20%7C%20ONNX-orange?style=flat-square"/>
+  <img src="https://img.shields.io/badge/Status-Production%20Ready-success?style=flat-square"/>
 </p>
 
 ---
 
-## 📌 Overview
-[**Try Live Web App**](https://huggingface.co/spaces/zainafxal/disaster-insight-webapp)
 
-During a natural disaster, information is chaotic. Emergency responders, NGOs, and governments are flooded with unstructured data from social media while trying to anticipate where the next high-impact event might occur. **DisasterInsight AI** was built to solve this problem by providing a unified platform that filters the noise from real-time data streams, quantifies risk based on historical patterns, and provides strategic forecasts to enable proactive planning.
+## 📌 Overview
+
+During a disaster, decision-makers are overwhelmed by unstructured data. **DisasterInsight AI** is an end-to-end platform that unifies diverse AI disciplines to solve this:
+1.  **Sees** damage using Computer Vision.
+2.  **Reads** crisis reports using NLP.
+3.  **Predicts** future risks using Time-Series Forecasting.
+4.  **Reasons** and plans using a Generative AI Agent with access to official protocols (RAG).
+
+---
+
+## 🎥 Project Demo Video: 
+> Click the thumbnail below to watch a short demo of the platform.
+
+[![Watch the Demo](./disaster-insight-frontend/src/assets/Thumbnil.jpg)](https://youtu.be/qCLY11nclM4)
+
+## SCREENSHOTS:
+**Dashboard:**
+
+<p align="center">
+    <img src="./disaster-insight-frontend/src/assets/dashboard-preview.jpg" alt="DisasterInsight AI Dashboard Preview" width="800"/>
+  </a>
+</p>
+
+**Auto-Triage of Disaster Imagery:**
+<p align="center">
+    <img src="./disaster-insight-frontend/src/assets/Damage_Assesment.PNG" alt="DisasterInsight AI Dashboard Preview" width="800"/>
+  </a>
+</p>
+
+**Forecasts:**
+<p align="center">
+    <img src="./disaster-insight-frontend/src/assets/Forecast.PNG" alt="DisasterInsight AI Dashboard Preview" width="800"/>
+  </a>
+</p>
+
+**Smart Chat Assistant (RAG based):**
+<p align="center">
+    <img src="./disaster-insight-frontend/src/assets/Chat_Assistant.PNG" alt="DisasterInsight AI Dashboard Preview" width="600"/>
+  </a>
+</p>
 
 ---
 
 ## ✨ Key Features
 
-This platform integrates four distinct AI models and a live data feed into a single, cohesive user experience.
+This is not just a dashboard; it is an **Orchestration of 5 AI Modules**:
 
-*   **🌐 Real-Time Signal Analysis:** An NLP Transformer model classifies live social media text into 10 humanitarian categories, identifying critical information as it emerges.
-*   **📈 Predictive Risk Planning:** An XGBoost model assesses the potential severity of a disaster event, providing a data-driven risk probability based on historical data.
-*   **📊 Forecasting Suite:**
-    *   **Strategic Global Forecast:** A Prophet time-series model provides a long-term forecast of global earthquake frequency, establishing a baseline for "normal" activity.
-    *   **Tactical Regional Forecast:** A specialized XGBoost model predicts the near-term probability of a high-impact earthquake in four of the world's most vulnerable regions.
-*   **📡 Live Global Monitoring:** An integrated, real-time feed from the USGS API displays significant earthquake events as they happen around the globe.
-*   **🖥️ Professional Dashboard:** A polished, branded, and fully responsive **React** frontend with an intuitive dark mode and modern, interactive visualizations.
+### 🤖 1. Multimodal AI Agent (GenAI + RAG)
+-   **Brain:** Powered by **Google Gemini 2.0**.
+-   **Tools:** The agent can autonomously call the Risk Model, Forecast Model, or search the database based on user queries.
+-   **RAG (Retrieval Augmented Generation):** Queries a vector database (ChromaDB) of official PDF safety protocols to provide verified advice, eliminating hallucinations.
 
+### 👁️ 2. Visual Damage Assessment (Computer Vision)
+-   **Model:** Fine-tuned **MobileNetV2** (served via **ONNX Runtime** for low latency).
+-   **Function:** Classifies uploaded images (e.g., "Major Damage", "Flood", "Fire") and automatically assigns a **Triage Priority** (Critical/High/Low).
+
+### 🌐 3. Real-Time Signal Analysis (NLP)
+-   **Model:** DistilBERT Transformer.
+-   **Function:** Classifies social media streams into 10 humanitarian categories (e.g., "Rescue Needed", "Infrastructure Damage") in real-time.
+
+### 📊 4. Strategic & Tactical Forecasting
+-   **Global Forecast:** Uses **Prophet** to predict long-term seismic trends.
+-   **Regional Impact:** Uses **XGBoost** to predict the probability of high-fatality events in specific high-risk zones.
+
+---
+
+## 📦 High-Level Architecture
+
+```text
++------------------------+      +---------------------------+      +--------------------------+
+|                        |      |                           |      |                          |
+|   React Frontend       | ---> |     FastAPI Backend       | ---> |    4x AI / ML Models     |
+| (Tailwind, Chart.js,   |      |    (Python, Uvicorn)      |      |  (Transformers, XGBoost, |
+|      Mapbox GL)        |      |                           |      |    Prophet, ONNX CV)     |
+|                        |      |                           |      |                          |
++------------------------+      +---------------------------+      +--------------------------+
+```
+
+## 🏗️ System Architecture
+
+The system follows a **decoupled, microservices-ready architecture**, integrating AI models and agentic workflows.
+
+<p align="center">
+  <img
+    src="./visuals/diagram/architecture_diagram.jpeg"
+    alt="DisasterInsight AI Dashboard Preview"
+    width="800"
+  />
+</p>
+
+
+### Component Key Technologies
+- **Frontend:** React, Tailwind CSS, Chart.js, Mapbox GL
+- **Backend API:** Python, FastAPI, Uvicorn, Docker
+- **AI & ML Models:** PyTorch, Transformers(DistilBERT), Scikit-learn, XGBoost, Prophet, ONNX CV Models
+- **Data & Storage:** Pandas, Jupyter, ChromaDB (for RAG)
+- **Agentic Workflow:** Gemini AI Agent orchestrating model calls & retrieval
+- **Agentic Workflow:** Gemini AI Agent orchestrating model calls & retrieval
 
 ---
 
@@ -75,29 +138,7 @@ This repository includes comprehensive documentation for both end-users and deve
     > ➡️ **[View EDA Reports](./reports/eda/)**
 
 *   **Dashboard User Guide:** A detailed walkthrough of all features in the live web application.
-    > ➡️ **[Read the User Guide](./disaster-insight-frontend/docs/USER_GUIDE.md)**
-
----
-
-
-## 🛠️ Tech Stack & Architecture
-
-DisasterInsight AI is built as a modern, decoupled, three-tier system, ensuring scalability and maintainability.
-
-```text
-+------------------------+      +---------------------------+      +--------------------------+
-|                        |      |                           |      |                          |
-|   React Frontend       | ---> |     FastAPI Backend       | ---> |    4x AI / ML Models     |
-| (on Hugging Face)      |      |   (on Hugging Face)       |      | (Transformers, XGBoost...) |
-|                        |      |                           |      |                          |
-+------------------------+      +---------------------------+      +--------------------------+
-```
-
-### Component Key Technologies
-- **Frontend:** React, Tailwind CSS, Chart.js, Mapbox GL
-- **Backend API:** Python, FastAPI, Uvicorn, Docker
-- **Data Science & ML:** PyTorch, Transformers, Scikit-learn, XGBoost, Prophet, Pandas, Jupyter
-- **Deployment:** Hugging Face Spaces
+    > ➡️ **[Read the User Guide](./disaster-insight-frontend/docs/USER_GUIDE.md)** 
 
 ---
 
@@ -126,6 +167,7 @@ To run the entire platform locally, you will need to set up the backend and fron
 - Git
 - Conda / Python 3.9+
 - Node.js 16+
+- **Google Gemini API Key** (Free tier is sufficient)
 
 ### **1. Set Up the Data & Models**
 The models and notebooks require training data which is not included in this repo.

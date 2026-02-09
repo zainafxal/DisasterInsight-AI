@@ -16,43 +16,11 @@
   A responsive, production-grade web application built with React, designed to transform complex AI-driven predictions into intuitive, actionable insights.
 </p>
 
-<p align="center">
-  <a href="https://huggingface.co/spaces/zainafxal/disaster-insight-webapp" target="_blank">
-    <img src="https://img.shields.io/badge/Live_Demo-Visit_WebApp-blue?style=for-the-badge&logo=react" alt="Live Demo"/>
-  </a>
-</p>
-
-<p align="center">
-  <a href="https://huggingface.co/spaces/zainafxal/disaster-insight-webapp">Live Demo</a> •
-  <a href="#key-features">Key Features</a> •
-  <a href="#architecture">Architecture</a> •
-  <a href="#getting-started-for-developers">Getting Started (for Developers)</a> •
-  <a href="#license">License</a>
-</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Framework-React-blue?style=for-the-badge&logo=react" alt="React Badge"/>
   <img src="https://img.shields.io/badge/Backend-FastAPI-green?style=for-the-badge&logo=fastapi" alt="FastAPI Badge"/>
-  <a href="https://huggingface.co/spaces/zainafxal/disaster-insight-webapp"><img src="https://img.shields.io/badge/Deployment-Hugging_Face-yellow?style=for-the-badge&logo=huggingface" alt="Hugging Face Deployment"/></a>
   <img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=for-the-badge" alt="License Badge"/>
-</p>
-
----
-
-## 🚀 Live Demo
-
-The DisasterInsight AI web application is live and publicly accessible!
-
-> **Live Web App:** [**https://huggingface.co/spaces/zainafxal/disaster-insight-webapp**](https://huggingface.co/spaces/zainafxal/disaster-insight-webapp)
-
-The application is powered by a separate backend API, also deployed on Hugging Face Spaces.
-> **Backend API Docs (Swagger UI):** [**zainafxal-disaster-insight-api.hf.space/docs**](https://zainafxal-disaster-insight-api.hf.space/docs)
-
-<br/>
-
-
-<p align="center">
-  <img src="./src/assets/dashboard-preview.jpg" alt="DisasterInsight AI Dashboard Preview" width="800"/>
 </p>
 
 ---
@@ -67,18 +35,14 @@ For a detailed walkthrough of all dashboard features and best practices for usin
 
 ## ✨ Key Features
 
-This application provides a comprehensive suite of tools for disaster analysis and forecasting:
+This application connects to the backend API to provide a unified disaster intelligence dashboard:
 
-*   **🌐 Real-Time Tweet Analysis:** Classify social media posts into 10 distinct humanitarian categories using a fine-tuned NLP model.
-*   **📈 Predictive Risk Planner:** Assess the potential severity of a disaster event based on its characteristics, powered by a historical XGBoost model.
-*   **📊 Strategic & Tactical Forecasts:**
-    *   Visualize the **Global Earthquake Frequency Forecast** to understand long-term seismic trends.
-    *   Access the **Regional Impact Forecaster** for a near-term probability of fatal earthquakes in high-risk zones.
-*   **📡 Live USGS Data Feed:** Monitor significant global earthquakes in near real-time with an integrated feed directly from the U.S. Geological Survey.
-*   **🎨 Modern, Branded UI:** A polished and professional user interface with a custom brand identity.
-*   **💡 Dark Mode:** A stunning, eye-friendly dark theme for comfortable use in any lighting condition.
-*   **📱 Responsive Design:** A fully responsive layout that works seamlessly on desktops, tablets, and mobile devices.
-*   **📊 Interactive Visualizations:** Beautiful, modern charts and maps that bring complex data to life.
+*   **🤖 Multimodal AI Agent:** A chat interface where users can upload images for analysis or ask questions. The agent uses **RAG** to retrieve verified safety protocols.
+*   **👁️ Visual Damage Assessment:** Upload drone/satellite imagery to detect damage type (Fire, Flood, Collapse) and get automated triage priorities.
+*   **🌐 Real-Time Tweet Analysis:** Classify social media posts into 10 distinct humanitarian categories.
+*   **📈 Predictive Risk Planner:** interactive forms to assess the potential severity of hypothetical disaster events.
+*   **📊 Interactive Forecasts:** Visualize global seismic trends with confidence intervals using Recharts.
+*   **📡 Live Global Monitoring:** Real-time earthquake feed via USGS integration with map visualization.
 
 ---
 
@@ -89,8 +53,8 @@ DisasterInsight AI operates on a modern, decoupled three-tier architecture. This
 ```text
 +----------------+      +---------------------------+      +-----------------------+
 |                |      |                           |      |                       |
-|   React User   | ---> |     FastAPI Backend       | ---> |    AI / ML Models     |
-|   Interface    |      | (on Hugging Face Spaces)  |      |   (NLP, XGBoost, etc.)|
+|   React User   | ---> |     FastAPI Backend       | ---> |  AI Models / Ai Agents|
+|   Interface    |      |    (Local: Port 8000)     |      |  (Gemini, ONNX, etc.) |
 |                |      |                           |      |                       |
 +----------------+      +---------------------------+      +-----------------------+
 This decoupled approach ensures scalability and maintainability. The frontend handles all user interactions and data visualization, while the backend manages the heavy lifting of AI model inference.
@@ -111,7 +75,7 @@ Follow these instructions to get the frontend up and running on your local machi
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/your-username/disaster-insight-frontend.git
+    git clone https://github.com/zainafzal/disaster-insight-frontend.git
     cd disaster-insight-frontend
     ```
 
@@ -123,13 +87,14 @@ Follow these instructions to get the frontend up and running on your local machi
     ```
 
 3.  **Configure Environment Variables:**
-    This application needs to know the URL of the backend API. Create a new file in the root directory named `.env.local`.
-    ```
-    touch .env.local
-    ```
-    Open the file and add the following line. This points the app to the live, deployed backend.
-    ```env
-    REACT_APP_API_BASE_URL=https://zainafxal-disaster-insight-api.hf.space
+    This application needs to know the URL of the backend API. Create a new file in the root directory named `.env`.
+
+    ```bash
+    # Points to your local FastAPI server
+    VITE_API_BASE_URL=http://127.0.0.1:8000/api/v1
+
+    # USGS Feed (External)
+    VITE_USGS_API_URL=https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson
     ```
 
 4.  **Run the application:**
@@ -153,7 +118,6 @@ The application should now be running at `http://localhost:3000`.
 
 ### Backend
 *   The backend is a separate [FastAPI](https://fastapi.tiangolo.com/) service.
-*   **Deployment:** Hosted on [Hugging Face Spaces](https://huggingface.co/spaces) with Docker.
 
 ---
 

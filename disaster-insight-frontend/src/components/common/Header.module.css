@@ -637,3 +637,58 @@
 .drawerList .navLabel {
   display: inline !important;
 }
+
+
+/* ... your existing styles ... */
+
+/* NEW: Vision Button Specific Styles */
+.visionBtn {
+  background: rgba(249, 115, 22, 0.1) !important; /* Light orange background */
+  border: 1px solid rgba(249, 115, 22, 0.2) !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Center the content inside the IconButton */
+.visionContent {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Circular “AI” badge roughly same size as the camera icon */
+.visionAiText {
+  width: 24px;           /* match MUI icon size */
+  height: 24px;          /* match MUI icon size */
+  border-radius: 50%;    /* perfect circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 0.85rem;    /* slightly larger text */
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  color: var(--color-primary);
+  background: rgba(249, 115, 22, 0.16);
+  box-shadow: 0 0 0 1px rgba(249, 115, 22, 0.45);
+}
+
+.visionBtn:hover {
+  background: rgba(249, 115, 22, 0.2) !important;
+  transform: scale(1.05);
+}
+
+[data-theme="dark"] .visionBtn {
+  background: rgba(249, 115, 22, 0.15) !important;
+  border: 1px solid rgba(249, 115, 22, 0.3) !important;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 576px) {
+  .visionBtn {
+    background: transparent !important; /* Cleaner look on small screens */
+    border: none !important;
+  }
+}

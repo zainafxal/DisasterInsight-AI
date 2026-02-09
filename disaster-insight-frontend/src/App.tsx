@@ -12,6 +12,9 @@ import RiskPlanner from './pages/RiskPlanner';
 import Forecasts from './pages/Forecasts';
 import './styles/globals.css';
 import ScrollToTop from './components/common/ScrollToTop';
+import DisasterNews from './pages/DisasterNews';
+import ChatAssistant from './components/ChatAssistant';
+import DamageAssessment from './pages/DamageAssessment';
 
 function AppContent() {
   const { theme } = useTheme();
@@ -74,7 +77,14 @@ function AppContent() {
             <Route path="/signal-analysis" element={<SignalAnalysis />} />
             <Route path="/risk-planner" element={<RiskPlanner />} />
             <Route path="/forecasts" element={<Forecasts />} />
+            <Route path="/news" element={<DisasterNews />} />
+            <Route path="/damage-assessment" element={<DamageAssessment />} />
+            
           </Routes>
+          <ChatAssistant />
+
+
+
         </MainLayout>
       </Router>
     </MuiThemeProvider>

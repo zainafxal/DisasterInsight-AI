@@ -11,6 +11,10 @@ joblib==1.5.0
 
 # -------------------------------------
 # ✅ Deep Learning & Transformers
+# tensorflow and Pillow is required for CV Model (05 Model) only - I have trained CV model (Notebooke 05) seprately on Google Collab
+# So if you want conflicts free environment for other notebooks, you can remove these two libraries
+
+tensorflow==2.19.0          # Required for MobileNetV2, CNN, Keras
 torch==2.5.1
 transformers==4.36.2
 datasets==3.6.0
@@ -20,6 +24,11 @@ tqdm==4.67.1
 # ✅ Visualization
 matplotlib==3.10.0
 seaborn==0.13.2
+
+# -------------------------------------
+# ✅ Data Augmentation / Image Processing
+Pillow==10.1.0              # Required by ImageDataGenerator
+opencv-python==4.8.1.78     # Optional if using advanced CV
 
 # -------------------------------------
 # ✅ Time Series Forecasting

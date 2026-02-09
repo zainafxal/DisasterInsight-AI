@@ -1,133 +1,71 @@
 # DisasterInsight AI: Project Summary Report
 
-**Version:** 1.0  
-**Date:** 23-August-2025  
+**Version:** 1.0 (Final Release)  
 **Author:** MUHAMMAD ZAIN
 
 ---
 
 ## 1. Project Objective
 
-The primary objective of the DisasterInsight AI project was to design, build, and deploy a full-stack, end-to-end platform for global disaster analytics. The platform aims to transform chaotic, high-volume data streams into actionable intelligence for emergency responders, NGOs, and strategic planners by leveraging a suite of specialized AI models. The system provides a three-tiered intelligence capability: real-time detection, predictive risk assessment, and strategic forecasting.
+The primary objective of DisasterInsight AI is to bridge the gap between chaotic data and actionable intelligence during crises. By orchestrating multiple AI disciplines—**Generative AI, Computer Vision, and Predictive Modeling**—into a single platform, we empower responders to see, read, and predict disaster impacts in real-time.
 
 ---
 
 ## 2. System Architecture
 
-The platform operates on a modern, decoupled three-tier architecture:
+The platform operates on a decoupled microservices architecture:
 
-1.  **React Frontend:** A professional, responsive user interface that serves as the main entry point for users. It visualizes data and allows interaction with the models.
-2.  **FastAPI Backend:** A high-performance Python backend that loads the trained AI models and exposes their functionality through a versioned REST API.
-3.  **AI/ML Models:** Four distinct, serialized models that form the intelligent core of the platform.
+1.  **Presentation Layer (React):** A modern UI handling complex data visualization and chat interactions.
+2.  **Orchestration Layer (FastAPI):** A backend that manages the "Brain" (Agent) and serves specialized inference models.
+3.  **Intelligence Layer:** A suite of 5 specialized models and a Vector Database (RAG).
 
-```text
-+------------------------+      +---------------------------+      +--------------------------+
-|                        |      |                           |      |                          |
-|   React Frontend       | ---> |     FastAPI Backend       | ---> |    4x AI / ML Models     |
-| (on Hugging Face)      |      |   (on Hugging Face)       |      | (Transformers, XGBoost...) |
-|                        |      |                           |      |                          |
-+------------------------+      +---------------------------+      +--------------------------+
-```
 ---
 
 ## 3. Methodology and Modules
 
-Four core analytical modules were developed to power the platform.
+### **M1: Real-Time NLP Classifier**
+- **Objective:** Filter social noise to find actionable humanitarian signals.
+- **Model:** Fine-tuned **DistilBERT** Transformer.
+- **Result:** **74% F1-Score** on multi-class crisis categorization.
 
+### **M2: Static Risk Predictor**
+- **Objective:** Quantify the risk of high-fatality events based on historical data.
+- **Model:** **XGBoost Classifier** with Scikit-learn pipelines.
+- **Result:** **ROC-AUC 0.87** on EMDAT historical dataset.
 
-### **M1: Real-Time NLP Disaster Tweet Classifier**
+### **M3: Global Forecasting (Strategic)**
+- **Objective:** Establish a baseline for global seismic activity.
+- **Model:** **Prophet** Time-Series Model.
+- **Result:** Accurate long-term trend analysis with confidence intervals.
 
-- **Objective:**  
-  To filter and classify unstructured social media text into 10 distinct humanitarian categories.
+### **M4: Regional Forecasting (Tactical)**
+- **Objective:** High-precision alerts for specific vulnerable zones (e.g., SE Asia).
+- **Model:** Specialized **XGBoost** model trained on regional subsets.
+- **Result:** **67% Precision** in predicting high-impact events.
 
-- **Data Sources:**  
-  CrisesNLP, HumanAid, and CrisisBench datasets, which were harmonized into a unified schema.
+### **M5: Visual Damage Assessment (New)**
+- **Objective:** To automate the triage of disaster imagery (photos/drone shots).
+- **Model:** **MobileNetV2** (Transfer Learning) converted to **ONNX** for optimized CPU inference.
+- **Capability:** Classifies images (Fire, Flood, Building Collapse) and assigns a **Triage Priority (Red/Orange/Green)** automatically.
+- **Result:** **91% Accuracy** on the validation set.
 
-- **Modeling Approach:**  
-  A pre-trained `distilbert-base-uncased` Transformer model was fine-tuned on the combined text corpus for multi-class text classification.
-
-- **Key Results:**  
-  The model achieved a **74% Weighted F1-Score** on the unseen benchmark dataset, demonstrating strong performance in noise filtration (`not_humanitarian` class) and identifying key event types.
-
----
-
-### **M2: Static Disaster Risk Predictor**
-
-- **Objective:**  
-  To predict the probability of a disaster event becoming a "high-impact" incident (defined as >10 fatalities) based on its static characteristics.
-
-- **Data Source:**  
-  The EMDAT International Disaster Database.
-
-- **Modeling Approach:**  
-  An XGBoost Classifier was trained on a structured dataset with features like `Country`, `Region`, and `Disaster Type`.  
-  The model was encapsulated in a `Scikit-learn` pipeline for reproducible preprocessing.
-
-- **Key Results:**  
-  The model achieved an excellent **ROC-AUC score of 0.87**, indicating a strong ability to distinguish between high and low-risk events.  
-  Feature importance analysis revealed that **Disaster Group** and specific geographic regions were the most significant predictors.
+### **M6: Agentic RAG System (New)**
+- **Objective:** To provide a conversational interface that can "reason" and "retrieve".
+- **Architecture:** Powered by **Google Gemini 2.0**. The agent utilizes **Function Calling** to autonomously use the Risk and Forecast models as tools.
+- **RAG Implementation:** Uses **ChromaDB** to index official disaster protocol PDFs. When a user asks "What to do during a flood?", the agent retrieves verified guidelines instead of hallucinating.
 
 ---
 
-### **M3: Global Earthquake Frequency Forecaster**
+## 4. Limitations
 
-- **Objective:**  
-  To provide a strategic, long-term forecast of the global monthly frequency of significant earthquakes (Magnitude ≥ 6.0), establishing a baseline for anomaly detection.
-
-- **Data Source:**  
-  The USGS Earthquake Database (1970–2016).
-
-- **Modeling Approach:**  
-  A time-series forecasting model was built using Meta's **Prophet** library to capture long-term trends and yearly seasonality.
-
-- **Key Results:**  
-  Rigorous time-series cross-validation yielded a **Mean Absolute Error (MAE)** of approximately **4.3 earthquakes per month**, providing a reliable error margin for the forecast.
-
----
-
-### **M4: Tactical Regional Impact Forecaster**
-
-- **Objective:**  
-  To predict the near-term (next quarter) probability of a fatal earthquake in four specific high-risk countries (**China, India, Indonesia, Philippines**).
-
-- **Data Source:**  
-  Filtered earthquake events from the EMDAT database.
-
-- **Modeling Approach:**  
-  Advanced time-series feature engineering was used to create a quarterly summary of seismic activity.  
-  An XGBoost Classifier was trained using a chronological split to predict the outcome in the subsequent quarter.
-
-- **Key Results:**  
-  The model functions as a **high-precision alarm**, achieving **67% Precision** on the "High-Impact Event" class — meaning it is correct two out of three times when raising an alert.
-
----
-
-## 4. Limitations and Challenges
-
-- **Data Dependency:**  
-  Model performance is inherently tied to the quality and scope of the training data. Models may not generalize well to regions or disaster types not well-represented in the source datasets.
-
-- **Model Specificity:**  
-  The M4 Regional Forecaster is highly specialized and valid only for the four countries it was trained on.
-
-- **NLP Scope:**  
-  The M1 NLP model is **not** a misinformation or "fake news" detector and is primarily trained on English text.
-
-- **Static vs. Dynamic Risk:**  
-  The M2 Risk Predictor uses **static, historical data** and cannot account for dynamic, real-time variables such as weather or preparedness levels.
+- **M4 Specificity:** The Regional Forecaster is valid only for the 4 trained countries.
+- **Static Risk:** M2 does not account for real-time weather changes.
+- **RAG Knowledge:** The agent's knowledge is limited to the documents ingested into the `documents/` folder.
 
 ---
 
 ## 5. Future Improvements
 
-- **Enhance NLP Model:**  
-  Retrain the M1 classifier to improve recall on under-represented but critical classes like `requests_or_needs`.
-
-- **Incorporate Dynamic Data:**  
-  Augment the M2 Risk Predictor with live data (e.g., **weather APIs**, **population density**) for improved real-time assessments.
-
-- **Expand Forecasting:**  
-  Develop additional M3-style models for other recurring disaster types (e.g., **hurricanes**, **floods**).
-
-- **Cloud Deployment:**  
-  Migrate from **Hugging Face Spaces** to a scalable cloud provider like **AWS** or **Google Cloud** for better performance, reliability, and MLOps capabilities.
+-   **Edge Deployment:** Port the ONNX CV model to a mobile app for offline usage in the field.
+-   **Multi-Agent System:** Implement a swarm where one agent monitors news while another plans logistics.
+-   **Cloud Native:** Containerize the full stack using Kubernetes (K8s) for auto-scaling.

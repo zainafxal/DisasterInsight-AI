@@ -35,6 +35,7 @@ import {
   InfoOutlined,
   FilterListRounded,
   DownloadRounded,
+  NewspaperRounded,
 } from "@mui/icons-material";
 import { format } from "date-fns";
 import EarthquakeMap from "../components/maps/EarthquakeMap";
@@ -45,6 +46,7 @@ import toast from "react-hot-toast";
 import styles from "./LiveFeed.module.css";
 
 export default function LiveFeed() {
+  
   const [earthquakes, setEarthquakes] = useState<EarthquakeData[]>([]);
   const [loading, setLoading] = useState(true);
   const [autoRefresh, setAutoRefresh] = useState(true);
@@ -296,6 +298,7 @@ export default function LiveFeed() {
             {autoRefresh ? "60s" : "Manual"}
           </Typography>
         </Box>
+
       </Box>
 
       {/* Stats Cards */}

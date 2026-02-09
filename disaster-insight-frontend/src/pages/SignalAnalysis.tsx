@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   useMediaQuery,
@@ -21,7 +22,10 @@ import {
   IconButton,
   Tooltip,
   Badge,
-  Avatar
+  Avatar,
+  Accordion,          // Added
+  AccordionSummary,   // Added
+  AccordionDetails    // Added
 } from '@mui/material';
 import {
   Psychology,
@@ -34,7 +38,10 @@ import {
   ContentCopyRounded,
   DeleteOutlineRounded,
   BoltRounded,
-  TipsAndUpdatesRounded
+  TipsAndUpdatesRounded,
+  NewspaperRounded,
+  ExpandMoreRounded,  // Added
+  HelpOutlineRounded  // Added
 } from '@mui/icons-material';
 import { api } from '../api/client';
 import type { ClassificationResult } from '../types';
@@ -117,6 +124,7 @@ const categoryInfo: Record<string, { color: string; icon: string; description: s
 };
 
 export default function SignalAnalysis() {
+  const navigate = useNavigate();
   const isSmallMobile = useMediaQuery('(max-width: 576px)');
   const [text, setText] = useState('');
   const [loading, setLoading] = useState(false);
@@ -128,6 +136,13 @@ export default function SignalAnalysis() {
     timestamp: Date;
   }>>([]);
   const [showHistory, setShowHistory] = useState(true);
+  
+  // State for the accordion dropdowns
+  const [expanded, setExpanded] = useState<string | false>('panel1');
+
+  const handleChange = (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+    setExpanded(isExpanded ? panel : false);
+  };
 
   const handleClassify = async () => {
     if (!text.trim()) return;
@@ -191,12 +206,35 @@ export default function SignalAnalysis() {
         </Box>
         
         <Box className={styles.badges}>
-        <Chip
-          icon={<BoltRounded className={styles.boltIcon} />}
-          label="DistilBERT Model"
-          className={styles.modelBadge}
-        />
-      </Box>
+          <Chip
+            icon={<BoltRounded className={styles.boltIcon} />}
+            label="DistilBERT Model"
+            className={styles.modelBadge}
+          />
+
+          <Button
+            variant="outlined"
+            size="small"
+            onClick={() => navigate('/news')}
+            startIcon={<NewspaperRounded />}
+            sx={{
+              borderRadius: '100px',
+              textTransform: 'none',
+              fontWeight: 600,
+              height: '32px',
+              borderColor: 'var(--color-border)',
+              color: 'var(--color-text)',
+              backgroundColor: 'var(--color-surface)',
+              '&:hover': {
+                borderColor: 'var(--color-primary)',
+                color: 'var(--color-primary)',
+                backgroundColor: 'rgba(249, 115, 22, 0.05)'
+              }
+            }}
+          >
+            Live Disaster Feed
+          </Button>
+        </Box>
       </Box>
 
       <Grid container spacing={3}>
@@ -275,7 +313,7 @@ export default function SignalAnalysis() {
                     <Typography
                       variant={isSmallMobile ? 'h5' : 'h6'}
                       className={styles.resultTitle}
-                      style={{ textAlign: isSmallMobile ? 'center' : 'left' }} // <-- CENTER for small mobile
+                      style={{ textAlign: isSmallMobile ? 'center' : 'left' }}
                     >
                       Classification Result
                     </Typography>
@@ -376,12 +414,12 @@ export default function SignalAnalysis() {
         </Grid>
 
         <Grid item xs={12} lg={4}>
-          {/* Model Info Card */}
+          {/* Model Info Card with NEW DROPDOWN SECTION */}
           <Card className={styles.infoCard}>
             <Box className={styles.infoGradient} />
             <CardContent>
               <Typography variant="h6" className={styles.infoTitle}>
-                <Info /> About This Model
+                <Info /> System Capabilities
               </Typography>
               
               <List className={styles.featureList}>
@@ -399,36 +437,77 @@ export default function SignalAnalysis() {
                     <CheckCircle className={styles.checkIcon} />
                   </ListItemIcon>
                   <ListItemText
-                    primary="10 Categories"
-                    secondary="Comprehensive disaster classification"
-                  />
-                </ListItem>
-                <ListItem>
-                  <ListItemIcon>
-                    <CheckCircle className={styles.checkIcon} />
-                  </ListItemIcon>
-                  <ListItemText
                     primary="Real-time Processing"
                     secondary="Sub-second response time"
-                  />
-                </ListItem>
-                <ListItem>
-                  <ListItemIcon>
-                    <CheckCircle className={styles.checkIcon} />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Multi-language Support"
-                    secondary="Primarily English, expanding soon"
                   />
                 </ListItem>
               </List>
 
               <Divider className={styles.divider} />
 
+              {/* --- NEW: DROPDOWN EXPLANATION SECTION --- */}
+              <Box sx={{ mt: 2 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                  <HelpOutlineRounded fontSize="small" color="action" />
+                  <Typography variant="subtitle2" fontWeight={700}>
+                    Understanding the Modes
+                  </Typography>
+                </Box>
+
+                <Accordion 
+                  expanded={expanded === 'panel1'} 
+                  onChange={handleChange('panel1')}
+                  disableGutters
+                  elevation={0}
+                  sx={{ 
+                    background: 'transparent', 
+                    '&:before': { display: 'none' },
+                    borderBottom: '1px solid var(--color-border)'
+                  }}
+                >
+                  <AccordionSummary expandIcon={<ExpandMoreRounded />}>
+                    <Typography variant="body2" fontWeight={600}>
+                      1. Signal Analysis Mode (Here)
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Typography variant="caption" color="text.secondary" sx={{ lineHeight: 1.6, display: 'block' }}>
+                      <b>What it is:</b> An AI tool that processes <i>unstructured text</i> (like tweets, SMS, or reports).<br/>
+                      <b>Why needed:</b> During a crisis, millions of messages are sent. Humans cannot read them all. This mode filters noise and automatically tags messages (e.g., "Needs Rescue" vs "Weather Update") so responders can prioritize.
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
+
+                <Accordion 
+                  expanded={expanded === 'panel2'} 
+                  onChange={handleChange('panel2')}
+                  disableGutters
+                  elevation={0}
+                  sx={{ 
+                    background: 'transparent', 
+                    '&:before': { display: 'none' }
+                  }}
+                >
+                  <AccordionSummary expandIcon={<ExpandMoreRounded />}>
+                    <Typography variant="body2" fontWeight={600}>
+                      2. Live Disaster Feed Mode
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Typography variant="caption" color="text.secondary" sx={{ lineHeight: 1.6, display: 'block' }}>
+                      <b>What it is:</b> A real-time aggregator of verified news articles and global headlines.<br/>
+                      <b>Why needed:</b> While Signal Analysis handles individual SOS messages, the Live Feed provides the "Big Picture"—confirmed reports from major agencies to understand the overall scale of the disaster.
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
+              </Box>
+              {/* ----------------------------------------- */}
+
+              <Divider className={styles.divider} />
+
               <Alert severity="info" className={styles.alert}>
-                This model classifies text topics and is optimized for 
-                English content. It acts as a first-pass filter for 
-                high-volume data streams in crisis situations.
+                This model acts as a first-pass filter for 
+                high-volume data streams.
               </Alert>
             </CardContent>
           </Card>

@@ -1,4 +1,8 @@
 # -------------------------------------
+# 🚨 PyTorch CPU Wheel Source (Must be at the TOP)
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+# -------------------------------------
 # ✅ FastAPI and Server
 fastapi==0.104.1
 uvicorn[standard]==0.24.0
@@ -16,19 +20,45 @@ plotly==5.18.0
 matplotlib==3.7.3
 
 # -------------------------------------
+# ✅ Deep Learning & CV (ONNX Core)
+
+# Actually Model is traind on this version
+# tensorflow=2.19.0
+
+# Required for Keras/MobileNetV2
+# pillow==10.1.0
+# as used in the notebooks/environment.yml
+
+# Due to compatibility issues, we are not including TensorFlow and Pillow in this requirements.txt.
+
+# we are using ONNX Converted model for inference in the API.
+# Using == for proper requirements syntax
+onnx==1.15.0
+onnxruntime==1.17.0
+
+# -------------------------------------
+# ✅ PyTorch CPU-only
+# Note: When using --extra-index-url, you don't always need the +cpu suffix,
+# but keeping it (or removing it) is fine as long as the index is correct.
+torch==2.1.2
+torchvision==0.16.2
+torchaudio==2.1.2
+
+# -------------------------------------
 # ✅ Transformers & NLP
 transformers[torch]==4.35.2
 accelerate==0.25.0
 
 # -------------------------------------
-# ✅ PyTorch CPU wheels (install via pip)
-torch==2.1.2+cpu
-torchvision==0.16.2+cpu
-torchaudio==2.1.2+cpu
--f https://download.pytorch.org/whl/cpu/torch_stable.html
-
-# -------------------------------------
-# ✅ FastAPI Internals & Utilities
+# ✅ FastAPI Utilities
 python-multipart==0.0.6
 pydantic==2.4.2
 python-dotenv==1.0.1
+
+# -------------------------------------
+# ✅ NEW PACKAGES (RAG + LLM Integration)
+google-generativeai
+chromadb
+pypdf
+tiktoken
+sentence-transformers

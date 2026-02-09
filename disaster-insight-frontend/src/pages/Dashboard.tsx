@@ -14,8 +14,15 @@ import {
   LanguageRounded,
   MonitorHeartRounded,
   ArrowForwardRounded,
-  FiberManualRecordRounded
+  FiberManualRecordRounded,
+  LocalHospitalRounded,
+  LocalPoliceRounded,
+  VolunteerActivismRounded,
+  SosRounded,
+  CloseRounded,
+  NearMeRounded
 } from '@mui/icons-material';
+
 import { useNavigate } from 'react-router-dom';
 import CountUp from 'react-countup';
 import styles from './Dashboard.module.css';
@@ -98,13 +105,12 @@ export default function Dashboard() {
   }, []);
 
   useEffect(() => {
-    // Fetch API online status
     let cancelled = false;
     (async () => {
       try {
         const ok = await api.pingRoot();
         if (!cancelled) setApiOnline(ok);
-      } catch (error) {
+      } catch {
         if (!cancelled) setApiOnline(false);
       }
     })();
@@ -114,7 +120,6 @@ export default function Dashboard() {
   }, []);
 
   useEffect(() => {
-    // Fetch real-time stats from various sources
     const fetchStats = async () => {
       const [majorEvents, latency] = await Promise.all([
         api.getMajorEventCount(),
@@ -132,10 +137,7 @@ export default function Dashboard() {
     };
 
     fetchStats();
-    
-    // Set up an interval to refresh the real-time stats
     const intervalId = setInterval(fetchStats, 60000);
-
     return () => clearInterval(intervalId);
   }, []);
 
@@ -204,17 +206,47 @@ export default function Dashboard() {
     },
   ];
 
+  // --- START SOS ACTION LAYER LOGIC ---
+  const [sosOpen, setSosOpen] = useState(false);
+  const [locating, setLocating] = useState(false);
+
+  const handleSOSClick = async (type: string) => {
+    setLocating(true);
+
+    const sendToWhatsapp = (lat: number | string, long: number | string, accuracy?: number) => {
+      const message = `🚨 *EMERGENCY SOS* 🚨%0A%0A*Type:* ${type.toUpperCase()}%0A*Location:* https://www.google.com/maps?q=${lat},${long}%0A*Coords:* ${lat}, ${long}%0A*Accuracy:* Within ${accuracy || '?'} meters%0A%0A_Sent via DisasterInsight AI_`;
+      window.open(`https://wa.me/?text=${message}`, '_blank');
+      setLocating(false);
+      setSosOpen(false);
+    };
+
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          sendToWhatsapp(position.coords.latitude, position.coords.longitude, position.coords.accuracy);
+        },
+        () => {
+          sendToWhatsapp("UNKNOWN", "UNKNOWN");
+          alert("Location access denied. Sending generic SOS.");
+        },
+        { enableHighAccuracy: true, timeout: 5000 }
+      );
+    } else {
+      sendToWhatsapp("UNSUPPORTED", "UNSUPPORTED");
+    }
+  };
+  // --- END SOS ACTION LAYER LOGIC ---
+
   return (
     <div className={styles.container}>
       <motion.div variants={containerVariants} initial="hidden" animate="visible">
+
         {/* Hero Section */}
         <motion.div 
-            className={styles.hero} 
-            variants={itemVariants}
-            style={{
-              marginTop: isSmallMobile ? '52px' : undefined // push the whole hero section down
-            }}
-          >
+          className={styles.hero} 
+          variants={itemVariants}
+          style={{ marginTop: isSmallMobile ? '52px' : undefined }}
+        >
           <div className={styles.heroBackground}>
             <div className={styles.heroGlow} />
             <div className={styles.heroPattern} />
@@ -223,8 +255,6 @@ export default function Dashboard() {
           <div className={styles.heroContent}>
             <div
               className={`${styles.heroBadge} ${apiOnline === false ? styles.badgeOffline : styles.badgeOnline}`}
-              aria-live="polite"
-              title={apiOnline === false ? 'Cannot reach API' : 'API reachable'}
             >
               <FiberManualRecordRounded
                 className={
@@ -237,34 +267,26 @@ export default function Dashboard() {
             </div>
 
             <h1 className={styles.title}>
-            Welcome to <span className={styles.brandName}>DisasterInsight AI</span>
-          </h1>
+              Welcome to <span className={styles.brandName}>DisasterInsight AI</span>
+            </h1>
 
-          <p className={styles.subtitle}>
-            Real-Time Global Disaster Analytics Powered by AI
-          </p>
+            <p className={styles.subtitle}>Real-Time Global Disaster Analytics Powered by AI</p>
+            <p className={styles.description}>Transforming data streams into actionable intelligence for crisis response</p>
 
-          <p className={styles.description}>
-            Transforming data streams into actionable intelligence for crisis response
-          </p>
-
-          <div className={styles.heroStats}>
-            <div className={styles.heroStat}>
-              <AutoAwesomeRounded />
-              <span>AI-Powered</span>
+            <div className={styles.heroStats}>
+              <div className={styles.heroStat}>
+                <AutoAwesomeRounded />
+                <span>AI-Powered</span>
+              </div>
+              <div className={styles.heroStat}>
+                <MonitorHeartRounded />
+                <span>24/7 Monitoring</span>
+              </div>
+              <div className={styles.heroStat}>
+                <LanguageRounded />
+                <span>Global Coverage</span>
+              </div>
             </div>
-            <div className={styles.heroStat}>
-              <MonitorHeartRounded />
-              <span>24/7 Monitoring</span>
-            </div>
-            <div className={styles.heroStat}>
-              <LanguageRounded />
-              <span>Global Coverage</span>
-            </div>
-          </div>
-
-
-
           </div>
         </motion.div>
 
@@ -410,7 +432,63 @@ export default function Dashboard() {
             );
           })}
         </Grid>
+
       </motion.div>
+
+      {/* SOS Floating Action Layer */}
+      <div className={styles.sosContainer}>
+        <AnimatePresence>
+          {sosOpen && (
+            <motion.div 
+              className={styles.sosMenu}
+              initial={{ opacity: 0, y: 20, scale: 0.8 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.8 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+            >
+              <div className={styles.sosOption} onClick={() => handleSOSClick('Medical Emergency')}>
+                <div className={`${styles.sosIcon} ${styles.medical}`}>
+                  <LocalHospitalRounded />
+                </div>
+                <span className={styles.sosLabel}>Medical</span>
+              </div>
+              
+              <div className={styles.sosOption} onClick={() => handleSOSClick('Police Assistance')}>
+                <div className={`${styles.sosIcon} ${styles.police}`}>
+                  <LocalPoliceRounded />
+                </div>
+                <span className={styles.sosLabel}>Police</span>
+              </div>
+
+              <div className={styles.sosOption} onClick={() => handleSOSClick('NGO / Relief Support')}>
+                <div className={`${styles.sosIcon} ${styles.ngo}`}>
+                  <VolunteerActivismRounded />
+                </div>
+                <span className={styles.sosLabel}>NGO</span>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <motion.button
+          className={`${styles.sosFab} ${sosOpen ? styles.sosActive : ''}`}
+          onClick={() => setSosOpen(!sosOpen)}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          {locating ? (
+            <NearMeRounded className={styles.spinIcon} />
+          ) : sosOpen ? (
+            <CloseRounded />
+          ) : (
+            <>
+              <SosRounded />
+              <span className={styles.pulseRing}></span>
+            </>
+          )}
+        </motion.button>
+      </div>
+
     </div>
   );
 }

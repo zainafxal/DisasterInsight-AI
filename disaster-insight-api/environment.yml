@@ -1,10 +1,11 @@
 name: disaster-api
+
 channels:
-  - pytorch
   - conda-forge
   - defaults
+
 dependencies:
-  # Core
+  # Core Python
   - python=3.10
   - pip
   - numpy=1.24.3
@@ -16,19 +17,30 @@ dependencies:
   - matplotlib=3.7.3
   - plotly=5.18.0
 
-  # PyTorch CPU-only build (from pytorch channel)
-  - pytorch=2.1.2
-  - torchvision=0.16.2
-  - torchaudio=2.1.2
-  - cpuonly
+  # ✅ Deep Learning & CV
+  # Actually Model is traind on this version
+  # tensorflow=2.19.0
+  # Required for Keras/MobileNetV2
+  # pillow==10.1.0
+  # as used in the notebooks/environment.yml
+  # Due to compatibility issues, we are not including TensorFlow and Pillow in this requirements.txt.
+  # we are using ONNX Converted model for inference in the API.
 
-  # System utilities (Prophet sometimes needs compilers)
-  - gcc_linux-64  # only on Linux
-  - gxx_linux-64  # only on Linux
-  - make          # build tools
+  # ONNX Core
+  - onnx=1.15.0
+  - onnxruntime=1.17.0
+
+  # Linux build tools (ignored on Windows/Mac)
+  # - gcc_linux-64
+  # - gxx_linux-64
+  # - make
 
   # Pip dependencies
   - pip:
+      - --extra-index-url https://download.pytorch.org/whl/cpu
+      - torch==2.1.2
+      - torchvision==0.16.2
+      - torchaudio==2.1.2
       - fastapi==0.104.1
       - uvicorn[standard]==0.24.0
       - transformers[torch]==4.35.2
@@ -37,3 +49,12 @@ dependencies:
       - python-multipart==0.0.6
       - pydantic==2.4.2
       - python-dotenv==1.0.1
+
+      # NEW PACKAGES ADDED
+      - google-generativeai
+      - chromadb
+      - pypdf
+      - tiktoken
+      - sentence-transformers
+
+# IMPORTANT (MUST): # Ensure Microsoft Visual C++ Redistributable (X64 and x86 both) are installed.

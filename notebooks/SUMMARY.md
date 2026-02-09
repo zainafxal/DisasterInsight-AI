@@ -47,3 +47,35 @@ The workflow is designed to be sequential, with each notebook producing a model 
   - Trains an XGBoost Classifier on this chronologically-structured data.
   - Evaluates the model on the most recent data, demonstrating its function as a high-precision (though low-recall) "alarm system."
 - **Key Output:** A saved, specialized XGBoost model for tactical forecasting located in `models/04_regional_impact_forecaster/xgb_regional_impact_forecaster.joblib`.
+
+
+### 5. 05_disaster_visual_intelligence.ipynb
+
+- **Purpose:** To implement the platform’s computer vision–based visual intelligence module. This model provides physical confirmation of disaster events from images, categorizes the type and severity of damage, and converts predictions into actionable triage priorities for downstream agents and responders.
+
+- **Workflow:**
+  - Sets up a TensorFlow/Keras training environment with GPU acceleration and a standardized 224×224 RGB input shape.
+  - Loads a curated, class-balanced dataset of **2,000** post-disaster images (400 per class) across five categories:
+    - `0_no_damage`
+    - `1_flood_water`
+    - `2_fire_smoke`
+    - `3_damage_minor`
+    - `4_damage_major`
+  - Builds an image preprocessing and augmentation pipeline using `ImageDataGenerator`, including rescaling, rotation, shifts, shear, zoom, and horizontal flips, with an **80/20 train–validation split**.
+  - Trains and compares two architectures:
+    - **Model A:** A custom CNN baseline trained from scratch.
+    - **Model B:** A MobileNetV2 transfer-learning model (ImageNet weights, frozen base with a custom classification head).
+  - Selects **Model B (MobileNetV2)** as the production model based on markedly better validation performance (≈**94% accuracy**) and more stable training behavior.
+  - Performs detailed evaluation using a **classification report** and **confusion matrix**, confirming high per-class precision/recall and strong separation between critical classes (e.g., Fire vs Flood vs Major Damage).
+  - Implements a **triage logic layer** that maps predicted classes to operational priorities and actions:
+    - `4_damage_major`, `2_fire_smoke` → **CRITICAL (RED)** – Search & Rescue / Fire & Hazmat.
+    - `1_flood_water` → **HIGH (ORANGE)** – Evacuation and utilities shutdown.
+    - `3_damage_minor` → **MEDIUM (YELLOW)** – Engineering inspection.
+    - `0_no_damage` → **LOW (GREEN)** – Safe route logging.
+  - Creates an end-to-end **inference and triage function** that:
+    - Accepts a user-uploaded image.
+    - Runs the trained MobileNetV2 model to predict the damage class and confidence.
+    - Returns a human-readable **“Incident Triage Report”** including priority level, recommended action, and a protocol query string for use by the project’s LLM/RAG tools.
+  - Exports the final model in multiple formats (TensorFlow SavedModel, `.h5`, and modern `.keras`) and saves a `class_indices.json` file that preserves the mapping from numeric class IDs to human-readable labels for use in the FastAPI backend.
+
+- **Key Output:** A production-ready MobileNetV2-based disaster image classification and triage model (SavedModel directory, `.keras` and `.h5` files) plus its `class_indices.json` label mapping, stored under `models/05_disaster_visual_intelligence/`.

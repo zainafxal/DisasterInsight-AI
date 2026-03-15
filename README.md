@@ -36,7 +36,7 @@ During a disaster, decision-makers are overwhelmed by unstructured data. **Disas
 ## 🎥 Project Demo Video: 
 > Click the thumbnail below to watch a short demo of the platform.
 
-[![Watch the Demo](./disaster-insight-frontend/src/assets/Thumbnil.jpg)](https://youtu.be/qCLY11nclM4)
+[![Watch the Demo](./disaster-insight-frontend/src/assets/Thumbnil-play.jpg)](https://youtu.be/qCLY11nclM4)
 
 ## SCREENSHOTS:
 **Dashboard:**

@@ -22,6 +22,23 @@
 
 ---
 
+<div align="center">
+
+## 🚀 Live Deployment
+
+The platform is fully deployed and available for real-time testing:
+
+| Component | Status | Link |
+| :---: | :---: | :---: |
+| **Production Web App** | ![Live](https://img.shields.io/badge/Status-Live-success?style=flat-square) | [disaster-insight-ai.vercel.app](https://disaster-insight-ai.vercel.app/) |
+| **Backend API (Swagger)** | ![Online](https://img.shields.io/badge/API-Online-blue?style=flat-square) | [zainafxal-disaster-insight-api.hf.space/docs](https://zainafxal-disaster-insight-api.hf.space/docs) |
+
+> **Note:** The backend is hosted on Hugging Face Spaces (Free Tier). If the site takes a few seconds to load initially, it's just the server "waking up" from a cold start.
+
+</div>
+
+---
+
 
 ## 📌 Overview
 

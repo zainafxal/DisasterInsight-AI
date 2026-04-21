@@ -11,6 +11,18 @@
   <img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=for-the-badge" alt="License Badge"/>
 </p>
 
+
+## 🚀 Live API
+
+
+- ✅ **Swagger UI (interactive API docs):**  
+  🔗 [zainafxal-disaster-insight-api.hf.space/docs](https://zainafxal-disaster-insight-api.hf.space/docs)
+
+
+- ✅ **Health check endpoint:**  
+  🔗 [zainafxal-disaster-insight-api.hf.space/health](https://zainafxal-disaster-insight-api.hf.space/health)
+
+
 ---
 
 ## 🛠️ Getting Started: Running Locally

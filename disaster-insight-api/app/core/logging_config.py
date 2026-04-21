@@ -6,9 +6,21 @@ import os
 # Base directory of project
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-# Use environment variable LOGS_DIR if set, otherwise default
-LOGS_DIR = Path(os.environ.get("LOGS_DIR", BASE_DIR / "logs"))
+# --- MODIFIED LOGS CONFIG ---
+# Detect if running on Hugging Face
+if os.environ.get("SPACE_ID"):
+    LOGS_DIR = Path("/tmp/logs")
+else:
+    LOGS_DIR = Path(os.environ.get("LOGS_DIR", BASE_DIR / "logs"))
+
 LOGS_DIR.mkdir(parents=True, exist_ok=True)
+
+
+# --- DYNAMIC HANDLERS ---
+if os.environ.get("SPACE_ID"):
+    ACTIVE_HANDLERS = ["console"]
+else:
+    ACTIVE_HANDLERS = ["console", "file"]
 
 # --- Logging Configuration ---
 LOGGING_CONFIG = {
@@ -37,18 +49,18 @@ LOGGING_CONFIG = {
     },
     "loggers": {
         "app": {
-            "handlers": ["console", "file"],
+            "handlers": ACTIVE_HANDLERS,
             "level": "INFO",
             "propagate": False,
         },
         "uvicorn": {
-            "handlers": ["console", "file"],
+            "handlers": ACTIVE_HANDLERS,
             "level": "INFO",
             "propagate": False,
         },
     },
     "root": {
-        "handlers": ["console", "file"],
+        "handlers": ACTIVE_HANDLERS,
         "level": "WARNING"
     }
 }

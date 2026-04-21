@@ -8,7 +8,14 @@ EMBEDDING_FUNC = embedding_functions.SentenceTransformerEmbeddingFunction(
     model_name="all-MiniLM-L6-v2"
 )
 
-CHROMA_PATH = "chroma_db"
+# --- MODIFIED CONFIGURATION ---
+# Detect if running on Hugging Face or Local
+# Isse ensure karein ke Windows par /tmp na banaye
+if os.name != 'nt' and (os.environ.get("HF_HOME") or os.environ.get("SPACE_ID")):
+    CHROMA_PATH = "/tmp/chroma_db"
+else:
+    CHROMA_PATH = "chroma_db" # Windows (Local PC) ke liye purana rasta hi rehne dein
+
 DOCS_PATH = "documents"
 
 # Initialize Client

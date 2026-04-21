@@ -31,3 +31,15 @@ render.yaml
 
 # Jupyter notebooks (optional)
 .ipynb_checkpoints/
+
+
+# --- Project runtime data ---
+chroma_db/
+logs/
+
+# Temporary storage (HF etc.)
+tmp/
+
+
+# Huggingface_Readme
+README-HF*
